@@ -26,13 +26,13 @@ namespace Xero.Api.Core.Model
         public bool? SentToContact { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public decimal AppliedAmount { get; set; }
+        public decimal? AppliedAmount { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
         public decimal RemainingCredit { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public decimal CurrencyRate { get; set; }
+        public decimal? CurrencyRate { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
         public Contact Contact { get; set; }
@@ -44,10 +44,10 @@ namespace Xero.Api.Core.Model
         public DateTime? DueDate { get; set; }
 
         [DataMember(Name = "BrandingThemeID", EmitDefaultValue = false)]
-        public Guid BrandingThemeId { get; set; }
+        public Guid? BrandingThemeId { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public InvoiceStatus Status { get; set; }
+        public InvoiceStatus? Status { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
         public LineAmountType LineAmountTypes { get; set; }
@@ -68,7 +68,7 @@ namespace Xero.Api.Core.Model
         public bool? HasAttachments { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public DateTime FullyPaidOnDate { get; set; }
+        public DateTime? FullyPaidOnDate { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
         public List<LineItem> LineItems { get; set; }
