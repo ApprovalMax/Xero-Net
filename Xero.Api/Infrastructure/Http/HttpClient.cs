@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Text;
 using Xero.Api.Infrastructure.Interfaces;
@@ -13,6 +14,7 @@ namespace Xero.Api.Infrastructure.Http
     // It uses IAuthenticator or ICertificateAuthenticator to do the signing
     internal class HttpClient
     {
+        static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HttpClient));
         static readonly int defaultTimeout = (int)TimeSpan.FromMinutes(5.5).TotalMilliseconds;
 
         private readonly string _baseUri;
@@ -25,6 +27,8 @@ namespace Xero.Api.Infrastructure.Http
         public IUser User { get; set; }
         
         private IConsumer Consumer { get; set; }
+
+        public event EventHandler<ApiCallEventArgs> ApiCalled;
 
         public HttpClient(string baseUri)
         {
@@ -101,56 +105,17 @@ namespace Xero.Api.Infrastructure.Http
 
         public Response Get(string endpoint, string query)
         {
-            try
-            {
-                var request = CreateRequest(endpoint, "GET", query: query);
-                return new Response((HttpWebResponse)request.GetResponse());
-            }
-            catch (WebException we)
-            {
-	            if (we.Response != null)
-	            {
-		            return new Response((HttpWebResponse) we.Response);
-	            }
-
-	            throw;
-            }
+            return makeCall(endpoint, () => CreateRequest(endpoint, "GET", query: query));
         }
 
         public Response GetRaw(string endpoint, string mimeType, string query = null)
         {
-            try
-            {
-                var request = CreateRequest(endpoint, "GET", mimeType, query);
-                return new Response((HttpWebResponse)request.GetResponse());
-            }
-            catch (WebException we)
-            {
-	            if (we.Response != null)
-	            {
-		            return new Response((HttpWebResponse) we.Response);
-	            }
-
-	            throw;
-            }
+            return makeCall(endpoint, () => CreateRequest(endpoint, "GET", mimeType, query));
         }
 
         public Response Delete(string endpoint)
         {
-	        try
-	        {
-		        var request = CreateRequest(endpoint, "DELETE");
-		        return new Response((HttpWebResponse) request.GetResponse());
-	        }
-	        catch (WebException we)
-	        {
-		        if (we.Response != null)
-		        {
-			        return new Response((HttpWebResponse) we.Response);
-			}
-
-		        throw;
-	        }
+            return makeCall(endpoint, () => CreateRequest(endpoint, "DELETE"));
         }
 
         private HttpWebRequest CreateRequest(string endPoint, string method, string accept = "application/json", string query = null)
@@ -222,11 +187,11 @@ namespace Xero.Api.Infrastructure.Http
 
         private Response WriteToServerWithMultipart(string endpoint,string contentType, string name, string filename ,byte[] payload)
         {
-            var request = CreateRequest(endpoint, "POST");
-
-            WriteMultipartData(payload, request, contentType,name, filename);
-            
-            return new Response((HttpWebResponse)request.GetResponse());
+            return makeCall(endpoint, () => {
+                var request = CreateRequest(endpoint, "POST");
+                WriteMultipartData(payload, request, contentType,name, filename);
+                return request;
+            });
         }
 
         private void WriteMultipartData(byte[] bytes, HttpWebRequest request, string contentType, string name, string filename)
@@ -252,10 +217,51 @@ namespace Xero.Api.Infrastructure.Http
 
         private Response WriteToServer(string endpoint, byte[] data, string method, string contentType = "application/xml", string query = null)
         {
-            var request = CreateRequest(endpoint, method, query: query);
-            WriteData(data, request, contentType);
+            return makeCall(endpoint, () => {
+                var request = CreateRequest(endpoint, method, query: query);
+                WriteData(data, request, contentType);
+                return request;
+            });
+        }
 
-            return new Response((HttpWebResponse)request.GetResponse());
-        }        
+        private Response makeCall(string _endpoint, Func<HttpWebRequest> _getHttpWebRequest) {
+            var method = "Unknown";
+            var responseCode = "N/A";
+            var errorMessage = default(string);
+            var stopwatch = Stopwatch.StartNew();
+            try {
+                var request = _getHttpWebRequest();
+                method = request.Method;
+                try { logger.InfoFormat($"Sending data to Xero:\nMethod: {method},\nUri: {request.RequestUri}"); }
+                catch { }
+
+                var response = (HttpWebResponse)request.GetResponse();
+                responseCode = response.StatusCode.ToString();
+                stopwatch.Stop();
+                ApiCalled?.Invoke(this, new ApiCallEventArgs(_endpoint, method, stopwatch.ElapsedMilliseconds, responseCode, errorMessage));
+                return new Response(response);
+            }
+            catch (WebException we) {
+                logger.Warn("WebException occured during calling Xero API", we);
+                if (we.Response != null) {
+                    var response = new Response((HttpWebResponse)we.Response);
+                    if (response.StatusCode == HttpStatusCode.ServiceUnavailable && response.Body.Contains("oauth_problem")) {
+                        responseCode = "RateExceeded";
+                    }
+                    else {
+                        responseCode = response.StatusCode.ToString();
+                    }
+                    errorMessage = response.Body;
+                    stopwatch.Stop();
+                    ApiCalled?.Invoke(this, new ApiCallEventArgs(_endpoint, method, stopwatch.ElapsedMilliseconds, responseCode, errorMessage));
+                    return response;
+                }
+
+                throw;
+            }
+            finally {
+                stopwatch.Stop();
+            }
+        }
     }
 }

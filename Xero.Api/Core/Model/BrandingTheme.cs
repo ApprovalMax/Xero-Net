@@ -5,7 +5,7 @@ using Xero.Api.Common;
 namespace Xero.Api.Core.Model
 {
     [DataContract(Namespace = "")]
-    public class BrandingTheme : CoreData
+    public class BrandingTheme : CoreData, IHasId
     {
         [DataMember(Name = "BrandingThemeID")]
         public Guid BrandingThemeId { get; set; }
@@ -18,5 +18,10 @@ namespace Xero.Api.Core.Model
 
         [DataMember]
         public int SortOrder { get; set; }
+
+        public Guid Id {
+            get { return this.BrandingThemeId; }
+            set { this.BrandingThemeId = value; }
+        }
     }
 }

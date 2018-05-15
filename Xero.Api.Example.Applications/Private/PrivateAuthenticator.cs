@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
+using Xero.Api.Infrastructure.Http;
 using Xero.Api.Infrastructure.Interfaces;
 using Xero.Api.Infrastructure.OAuth;
 using Xero.Api.Infrastructure.OAuth.Signing;
@@ -13,7 +14,6 @@ namespace Xero.Api.Example.Applications.Private
         public PrivateAuthenticator(string certificatePath)
             :this(certificatePath, "")
         {
-            
         }
 
         public PrivateAuthenticator(string certificatePath, string certificatePassword = "")
@@ -26,6 +26,9 @@ namespace Xero.Api.Example.Applications.Private
         {
             _certificate = certificate;
         }
+
+        public event EventHandler<ApiCallEventArgs> ApiCalled;
+
 
         public string GetSignature(IConsumer consumer, IUser user, Uri uri, string verb, IConsumer consumer1)
         {

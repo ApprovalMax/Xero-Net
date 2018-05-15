@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Xero.Api.Core.Endpoints;
 using Xero.Api.Core.Model;
 using Xero.Api.Core.Model.Setup;
+using Xero.Api.Infrastructure.Http;
 using Organisation = Xero.Api.Core.Model.Organisation;
 
 namespace Xero.Api.Core
@@ -154,5 +156,6 @@ namespace Xero.Api.Core
         TrackingCategory Update(TrackingCategory item);
 
         void SummarizeErrors(bool summarize);
+        event EventHandler<ApiCallEventArgs> ApiCalled;
     }
 }

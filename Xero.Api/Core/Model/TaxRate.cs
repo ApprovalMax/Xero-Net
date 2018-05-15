@@ -7,7 +7,7 @@ using Xero.Api.Core.Model.Types;
 namespace Xero.Api.Core.Model
 {
     [DataContract(Namespace = "")]
-    public class TaxRate : CoreData
+    public class TaxRate : CoreData, IHasStringId
     {
         [DataMember]
         public string Name { get; set; }
@@ -44,5 +44,7 @@ namespace Xero.Api.Core.Model
 
         [DataMember(EmitDefaultValue = false)]
         public decimal EffectiveRate { get; set; }
+
+        public string StringId { get { return TaxType; } }
     }
 }

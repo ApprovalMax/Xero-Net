@@ -19,12 +19,12 @@ namespace Xero.Api.Core.Endpoints
             Client = client;
         }
 
-        public IEnumerable<Attachment> List(AttachmentEndpointType type, Guid parent)
+        public virtual IEnumerable<Attachment> List(AttachmentEndpointType type, Guid parent)
         {
             return Client.Get<Attachment, AttachmentsResponse>(string.Format("/api.xro/2.0/{0}/{1}/Attachments", type, parent.ToString("D")));
         }
 
-        public Attachment Get(AttachmentEndpointType type, Guid parent, string fileName)
+        public virtual Attachment Get(AttachmentEndpointType type, Guid parent, string fileName)
         {
 
             var mimeType = MimeTypes.GetMimeType(fileName);

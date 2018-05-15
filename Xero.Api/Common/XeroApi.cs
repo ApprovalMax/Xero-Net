@@ -1,4 +1,5 @@
-﻿using Xero.Api.Infrastructure.Http;
+﻿using System;
+using Xero.Api.Infrastructure.Http;
 using Xero.Api.Infrastructure.Interfaces;
 using Xero.Api.Infrastructure.RateLimiter;
 
@@ -20,7 +21,10 @@ namespace Xero.Api.Common
             : this(baseUri)
         {
             Client = new XeroHttpClient(baseUri, auth, consumer, user, readMapper, writeMapper, rateLimiter);
+            Client.ApiCalled += (sender, e) => ApiCalled?.Invoke(this, e);
         }
+
+        public event EventHandler<ApiCallEventArgs> ApiCalled;
 
         public string UserAgent
         {

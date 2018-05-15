@@ -14,6 +14,8 @@ namespace Xero.Api.Infrastructure.OAuth
         private const string XeroAccessTokenUri = "oauth/AccessToken";
         private const string XeroAuthorizeUri = "oauth/Authorize";
 
+        public event EventHandler<ApiCallEventArgs> ApiCalled;
+
         public OAuthTokens(string authorizeUri, string tokenUri)
         {
             _authorizeUri = authorizeUri;
@@ -70,10 +72,15 @@ namespace Xero.Api.Infrastructure.OAuth
             {
                 UserAgent = "Xero Api wrapper - " + consumer.ConsumerKey
             };
-            
+
+            EventHandler<ApiCallEventArgs> apiCalledHandler = (sender, e) => ApiCalled?.Invoke(this, e);
+            req.ApiCalled += apiCalledHandler;
+
             req.AddHeader("Authorization", header);
 
             var response = req.Post(endPoint, string.Empty);
+
+            req.ApiCalled -= apiCalledHandler;
 
             if (response.StatusCode != HttpStatusCode.OK)
             {

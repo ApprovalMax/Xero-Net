@@ -17,7 +17,7 @@ namespace Xero.Api.Core.Endpoints.Base
         {
         }
 
-        public IEnumerable<TResult> Create(IEnumerable<TResult> items)
+        public virtual IEnumerable<TResult> Create(IEnumerable<TResult> items)
         {
             var request = new TRequest();
             request.AddRange(items);
@@ -25,7 +25,7 @@ namespace Xero.Api.Core.Endpoints.Base
             return Put(request);
         }
 
-        public TResult Create(TResult item)
+        public virtual TResult Create(TResult item)
         {
             return Create(new[] { item }).First();
         }

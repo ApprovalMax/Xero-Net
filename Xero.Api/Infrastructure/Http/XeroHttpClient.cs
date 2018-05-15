@@ -36,12 +36,17 @@ namespace Xero.Api.Infrastructure.Http
             : this(jsonMapper, xmlMapper)
         {
             Client = new HttpClient(baseUri, auth, consumer, user, rateLimiter);
+            EventHandler<ApiCallEventArgs> apiCalledEventHander = (sender, e) => ApiCalled?.Invoke(this, e);
+            Client.ApiCalled += apiCalledEventHander;
+            auth.ApiCalled += apiCalledEventHander;
         }
 
         public DateTime? ModifiedSince { get; set; }
         public string Where { get; set; }
         public string Order { get; set; }
         public NameValueCollection Parameters { get; set; }
+
+        public event EventHandler<ApiCallEventArgs> ApiCalled;
 
         public string UserAgent
         {

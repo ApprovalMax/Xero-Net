@@ -15,7 +15,7 @@ namespace Xero.Api.Core.Endpoints
             Client = client;
         }
 
-        public BinaryFile Get(PdfEndpointType type, Guid parent)
+        public virtual BinaryFile Get(PdfEndpointType type, Guid parent)
         {
             var data = Client.Client.GetRaw(string.Format("/api.xro/2.0/{0}/{1}", type, parent.ToString("D")), "application/pdf");
 

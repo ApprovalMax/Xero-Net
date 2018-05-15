@@ -1,4 +1,5 @@
 ﻿using System;
+using Xero.Api.Infrastructure.Http;
 using Xero.Api.Infrastructure.Interfaces;
 using Xero.Api.Infrastructure.OAuth;
 
@@ -33,6 +34,9 @@ namespace Xero.Api.Example.Applications
             BaseUri = baseUri;
             Store = store;
         }
+
+        public event EventHandler<ApiCallEventArgs> ApiCalled;
+
 
         public string GetSignature(IConsumer consumer, IUser user, Uri uri, string verb, IConsumer consumer1)
         {

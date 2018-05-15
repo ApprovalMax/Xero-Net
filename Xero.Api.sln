@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{9EA20544-22EA-4E60-8D7B-6A9CCFCF0AEA}"
 EndProject
@@ -20,6 +20,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xero.Api.Example.Counts", "Xero.Api.Example.Counts\Xero.Api.Example.Counts.csproj", "{55C40EA3-0583-4C49-855D-6EAB0083D615}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xero.Api.Example.Applications", "Xero.Api.Example.Applications\Xero.Api.Example.Applications.csproj", "{D799E8CC-0917-465D-80DF-F8355201D13F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2EB9F8BA-CCFF-4B43-99A0-5130D368C78F} = {2EB9F8BA-CCFF-4B43-99A0-5130D368C78F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTests", "CoreTests\CoreTests.csproj", "{6E24F214-40CC-4891-8028-A068CD7CD4BD}"
 EndProject
@@ -87,5 +90,8 @@ Global
 		{6E24F214-40CC-4891-8028-A068CD7CD4BD} = {B2DF83D4-97EB-46C3-8511-6EFF7D6D7D38}
 		{617E7D53-BB1B-4112-A630-52218FD1352A} = {9EA20544-22EA-4E60-8D7B-6A9CCFCF0AEA}
 		{106797DD-3184-40F5-A68E-9258D904E169} = {9EA20544-22EA-4E60-8D7B-6A9CCFCF0AEA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD6E6B76-B682-4974-BCDB-77AE8542B368}
 	EndGlobalSection
 EndGlobal

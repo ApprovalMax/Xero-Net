@@ -7,7 +7,7 @@ using Xero.Api.Core.Model.Types;
 namespace Xero.Api.Core.Model
 {
     [DataContract(Namespace = "")]
-    public class Organisation
+    public class Organisation: Common.IHasStringId
     {
         [DataMember(Name = "OrganisationID")]
         public Guid Id { get; set; }
@@ -89,5 +89,13 @@ namespace Xero.Api.Core.Model
 
         [DataMember(EmitDefaultValue = false)]
         public List<ExternalLink> ExternalLinks { get; set; }
+
+        [DataMember(EmitDefaultValue = false)]
+        public string DefaultSalesTax { get; set; }
+
+        [DataMember(EmitDefaultValue = false)]
+        public string DefaultPurchasesTax { get; set; }
+
+        public string StringId { get { return ShortCode; } }
     }
 }
