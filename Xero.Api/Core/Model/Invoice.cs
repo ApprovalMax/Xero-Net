@@ -22,12 +22,12 @@ namespace Xero.Api.Core.Model
         [DataMember(Name = "Type")]
         public InvoiceType Type { get; set; }
 
-        [DataMember]
-        public InvoiceStatus Status { get; set; }
+        [DataMember(EmitDefaultValue = false)]
+        public InvoiceStatus? Status { get; set; }
 
-        [DataMember]
-        public LineAmountType LineAmountTypes { get; set; }
-        
+        [DataMember(EmitDefaultValue = false)]
+        public LineAmountType? LineAmountTypes { get; set; }
+
         [DataMember(EmitDefaultValue = false)]
         public DateTime? Date { get; set; }
 
