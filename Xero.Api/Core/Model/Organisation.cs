@@ -97,5 +97,11 @@ namespace Xero.Api.Core.Model
         public string DefaultPurchasesTax { get; set; }
 
         public string StringId { get { return ShortCode; } }
+
+        [DataMember]
+        public OrganisationClass Class { get; set; }
+
+        [DataMember]
+        public OrganisationEdition Edition { get; set; }
     }
 }
