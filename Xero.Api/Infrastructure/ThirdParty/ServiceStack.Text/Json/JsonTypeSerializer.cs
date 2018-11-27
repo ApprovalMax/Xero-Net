@@ -51,7 +51,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Json
         public WriteObjectDelegate GetWriteFn<T>()
         {
             return JsonWriter<T>.WriteFn();
-		}
+        }
 
         public WriteObjectDelegate GetWriteFn(Type type)
         {
@@ -302,7 +302,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Json
 
         public void WriteEnumFlags(TextWriter writer, object enumFlagValue)
         {
-			JsWriter.WriteEnumFlags(writer, enumFlagValue);
+            JsWriter.WriteEnumFlags(writer, enumFlagValue);
         }
 
         public void WriteLinqBinary(TextWriter writer, object linqBinaryValue)
@@ -345,7 +345,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Json
             if (json[index] != JsonUtils.QuoteChar)
                 throw new Exception("Invalid unquoted string starting with: " + json.SafeSubstring(50));
 
-        	var startIndex = ++index;
+            var startIndex = ++index;
             do
             {
                 char c = json[index];
@@ -417,16 +417,16 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Json
         {
             var length = input.Length;
             int start = 0;
-            int count = 0; 
+            int count = 0;
             StringBuilder output = new StringBuilder(length);
-            for ( ; count < length; )
+            for (; count < length;)
             {
                 if (input[count] == JsonUtils.QuoteChar)
                 {
                     if (start != count)
                     {
                         output.Append(input, start, count - start);
-                    }                    
+                    }
                     count++;
                     start = count;
                     continue;
@@ -478,9 +478,9 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Json
                         case 'u':
                             if (count + 4 < length)
                             {
-                                var unicodeString = input.Substring(count+1, 4);
+                                var unicodeString = input.Substring(count + 1, 4);
                                 var unicodeIntVal = UInt32.Parse(unicodeString, NumberStyles.HexNumber);
-                                output.Append(JsonTypeSerializer.ConvertFromUtf32((int) unicodeIntVal));
+                                output.Append(JsonTypeSerializer.ConvertFromUtf32((int)unicodeIntVal));
                                 count += 5;
                             }
                             else
@@ -491,17 +491,17 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Json
                         case 'x':
                             if (count + 4 < length)
                             {
-                                var unicodeString = input.Substring(count+1, 4);
+                                var unicodeString = input.Substring(count + 1, 4);
                                 var unicodeIntVal = UInt32.Parse(unicodeString, NumberStyles.HexNumber);
-                                output.Append(JsonTypeSerializer.ConvertFromUtf32((int) unicodeIntVal));
+                                output.Append(JsonTypeSerializer.ConvertFromUtf32((int)unicodeIntVal));
                                 count += 5;
                             }
                             else
                             if (count + 2 < length)
                             {
-                                var unicodeString = input.Substring(count+1, 2);
+                                var unicodeString = input.Substring(count + 1, 2);
                                 var unicodeIntVal = UInt32.Parse(unicodeString, NumberStyles.HexNumber);
-                                output.Append(JsonTypeSerializer.ConvertFromUtf32((int) unicodeIntVal));
+                                output.Append(JsonTypeSerializer.ConvertFromUtf32((int)unicodeIntVal));
                                 count += 3;
                             }
                             else
@@ -542,7 +542,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Json
                                 (char) (utf32 % 0x0400 + 0xDC00)});
         }
 
-    	public string EatTypeValue(string value, ref int i)
+        public string EatTypeValue(string value, ref int i)
         {
             return EatValue(value, ref i);
         }
@@ -574,7 +574,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Json
                 case JsWriter.QuoteChar:
                     return ParseString(value, ref i);
             }
-            
+
             //Is Value
             while (++i < valueLength)
             {

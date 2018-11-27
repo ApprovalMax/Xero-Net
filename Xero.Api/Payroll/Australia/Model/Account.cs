@@ -7,6 +7,6 @@ namespace Xero.Api.Payroll.Australia.Model
     public class Account : Common.Model.Account
     {
         [DataMember]
-        public AccountType Type { get; set; }        
+        public AccountType Type { get; set; }
     }
 }

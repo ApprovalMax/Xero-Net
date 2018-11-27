@@ -53,7 +53,7 @@ namespace Xero.Api.Infrastructure.OAuth
 
         public IToken GetRequestToken(IConsumer consumer, string header)
         {
-            return GetToken(_tokenUri,  new Token { ConsumerKey = consumer.ConsumerKey, ConsumerSecret = consumer.ConsumerSecret }, XeroRequestUri, header);
+            return GetToken(_tokenUri, new Token { ConsumerKey = consumer.ConsumerKey, ConsumerSecret = consumer.ConsumerSecret }, XeroRequestUri, header);
         }
 
         public IToken GetAccessToken(IToken token, string header)

@@ -18,7 +18,7 @@ namespace Xero.Api.Common
         public const string ImageBmp = "image/bmp";
 
         public const string Unknown = "application/octet-stream";
-        
+
         // Taken from http://stackoverflow.com/questions/58510/using-net-how-can-you-find-the-mime-type-of-a-file-based-on-the-file-signature
         public static string GetMimeType(FileInfo fileInfo)
         {

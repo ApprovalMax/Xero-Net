@@ -5,7 +5,7 @@ using Xero.Api.Payroll.Australia.Model.Status;
 
 namespace Xero.Api.Payroll.America.Model
 {
-    [DataContract(Namespace="")]
+    [DataContract(Namespace = "")]
     public class Timesheet
     {
         [DataMember(Name = "TimesheetID", EmitDefaultValue = false)]

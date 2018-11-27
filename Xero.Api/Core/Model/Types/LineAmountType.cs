@@ -10,6 +10,6 @@ namespace Xero.Api.Core.Model.Types
         [EnumMember]
         Inclusive,
         [EnumMember]
-        NoTax        
+        NoTax
     }
 }

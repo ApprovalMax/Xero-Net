@@ -24,10 +24,10 @@ namespace Xero.Api.Core.Model
 
         [DataMember]
         public BankTransactionStatus Status { get; set; }
-        
+
         [DataMember]
         public LineAmountType LineAmountTypes { get; set; }
-        
+
         [DataMember(EmitDefaultValue = false)]
         public bool? IsReconciled { get; set; }
 

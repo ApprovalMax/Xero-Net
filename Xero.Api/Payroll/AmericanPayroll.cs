@@ -40,7 +40,7 @@ namespace Xero.Api.Payroll
             Employees = new EmployeesEndpoint(Client);
             PayRuns = new PayRunsEndpoint(Client);
             Settings = new SettingsEndpoint(Client);
-            Timesheets = new TimesheetsEndpoint(Client);            
+            Timesheets = new TimesheetsEndpoint(Client);
         }
 
         public IEnumerable<PaySchedule> Create(IEnumerable<PaySchedule> items)

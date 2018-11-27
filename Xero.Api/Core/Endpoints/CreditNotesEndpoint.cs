@@ -11,7 +11,7 @@ namespace Xero.Api.Core.Endpoints
     public interface ICreditNotesEndpoint :
         IXeroUpdateEndpoint<CreditNotesEndpoint, CreditNote, CreditNotesRequest, CreditNotesResponse>, IPageableEndpoint<ICreditNotesEndpoint>
     {
-        
+
     }
 
     public class CreditNotesEndpoint

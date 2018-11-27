@@ -78,7 +78,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             }
             foreach (var cachedRecord in cachedRecords)
             {
-                var fullRecord = headers.ConvertAll(header => 
+                var fullRecord = headers.ConvertAll(header =>
                     cachedRecord.ContainsKey(header) ? cachedRecord[header] : null);
                 WriteRow(writer, fullRecord);
             }

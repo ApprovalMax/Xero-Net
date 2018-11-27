@@ -461,7 +461,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             return TypeSerializer.DeserializeFromString<T>(jsv);
         }
 
-        public static string ToJson<T>(this T obj) {
+        public static string ToJson<T>(this T obj)
+        {
             return JsConfig.PreferInterfaces
                 ? JsonSerializer.SerializeToString(obj, AssemblyUtils.MainInterface<T>())
                 : JsonSerializer.SerializeToString(obj);
@@ -643,7 +644,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             var newValue = new char[len];
             var firstPart = true;
 
-            for (var i = 0; i < len; ++i) {
+            for (var i = 0; i < len; ++i)
+            {
                 var c0 = value[i];
                 var c1 = i < len - 1 ? value[i + 1] : 'A';
                 var c0isUpper = c0 >= 'A' && c0 <= 'Z';
@@ -686,7 +688,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         {
             if (String.IsNullOrEmpty(value)) return value;
             value = value.ToCamelCase();
-            
+
             var sb = new StringBuilder(value.Length);
             foreach (var t in value)
             {
@@ -735,7 +737,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
                 && (type.Attributes & TypeAttributes.NotPublic) == TypeAttributes.NotPublic;
 #endif
         }
-        
+
         public static int CompareIgnoreCase(this string strA, string strB)
         {
             return String.Compare(strA, strB, InvariantComparisonIgnoreCase());

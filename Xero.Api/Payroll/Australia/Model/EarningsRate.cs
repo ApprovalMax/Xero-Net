@@ -25,7 +25,7 @@ namespace Xero.Api.Payroll.Australia.Model
 
         [DataMember]
         public string TypeOfUnits { get; set; }
-        
+
         [DataMember]
         public bool IsExemptFromTax { get; set; }
 
@@ -45,6 +45,6 @@ namespace Xero.Api.Payroll.Australia.Model
         public decimal? Amount { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public bool AccrueLeave { get; set; }        
+        public bool AccrueLeave { get; set; }
     }
 }

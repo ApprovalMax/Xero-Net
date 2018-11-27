@@ -64,7 +64,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Marc
             public override object this[string name]
             {
                 get { return accessor[target, name.ToUpperInvariant()]; }
-				set { accessor[target, name.ToUpperInvariant()] = value; }
+                set { accessor[target, name.ToUpperInvariant()] = value; }
             }
             public override object Target
             {
@@ -72,22 +72,22 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Marc
             }
         }
 
-		//sealed class DynamicWrapper : ObjectAccessor
-		//{
-		//    private readonly IDynamicMetaObjectProvider target;
-		//    public override object Target
-		//    {
-		//        get { return target; }
-		//    }
-		//    public DynamicWrapper(IDynamicMetaObjectProvider target)
-		//    {
-		//        this.target = target;
-		//    }
-		//    public override object this[string name]
-		//    {
-		//        get { return CallSiteCache.GetValue(name, target); }
-		//        set { CallSiteCache.SetValue(name, target, value); }
-		//    }
+        //sealed class DynamicWrapper : ObjectAccessor
+        //{
+        //    private readonly IDynamicMetaObjectProvider target;
+        //    public override object Target
+        //    {
+        //        get { return target; }
+        //    }
+        //    public DynamicWrapper(IDynamicMetaObjectProvider target)
+        //    {
+        //        this.target = target;
+        //    }
+        //    public override object this[string name]
+        //    {
+        //        get { return CallSiteCache.GetValue(name, target); }
+        //        set { CallSiteCache.SetValue(name, target, value); }
+        //    }
         //}
     }
 

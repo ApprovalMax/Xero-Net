@@ -41,8 +41,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             if (type == null)
             {
                 var typeDef = new AssemblyTypeDefinition(typeName);
-                type = !string.IsNullOrEmpty(typeDef.AssemblyName) 
-                    ? FindType(typeDef.TypeName, typeDef.AssemblyName) 
+                type = !string.IsNullOrEmpty(typeDef.AssemblyName)
+                    ? FindType(typeDef.TypeName, typeDef.AssemblyName)
                     : FindTypeFromLoadedAssemblies(typeDef.TypeName);
             }
 
@@ -62,13 +62,13 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
 
 #if !XBOX
 
-		
-		/// <summary>
-		/// The top-most interface of the given type, if any.
-		/// </summary>
-    	public static Type MainInterface<T>() 
+
+        /// <summary>
+        /// The top-most interface of the given type, if any.
+        /// </summary>
+        public static Type MainInterface<T>()
         {
-			var t = typeof(T);
+            var t = typeof(T);
 #if NETFX_CORE
     		if (t.GetTypeInfo().BaseType == typeof(object)) {
 				// on Windows, this can be just "t.GetInterfaces()" but Mono doesn't return in order.
@@ -76,14 +76,15 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
 				if (interfaceType != null) return interfaceType;
 			}
 #else
-    		if (t.BaseType == typeof(object)) {
-				// on Windows, this can be just "t.GetInterfaces()" but Mono doesn't return in order.
-				var interfaceType = t.GetInterfaces().FirstOrDefault(i => !t.GetInterfaces().Any(i2 => i2.GetInterfaces().Contains(i)));
-				if (interfaceType != null) return interfaceType;
-			}
+            if (t.BaseType == typeof(object))
+            {
+                // on Windows, this can be just "t.GetInterfaces()" but Mono doesn't return in order.
+                var interfaceType = t.GetInterfaces().FirstOrDefault(i => !t.GetInterfaces().Any(i2 => i2.GetInterfaces().Contains(i)));
+                if (interfaceType != null) return interfaceType;
+            }
 #endif
-			return t; // not safe to use interface, as it might be a superclass's one.
-		}
+            return t; // not safe to use interface, as it might be a superclass's one.
+        }
 
         /// <summary>
         /// Find type if it exists
@@ -187,9 +188,9 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
 
 #if !SILVERLIGHT
         private static Assembly LoadAssembly(string assemblyPath)
-		{
-			return Assembly.LoadFrom(assemblyPath);
-		}
+        {
+            return Assembly.LoadFrom(assemblyPath);
+        }
 #elif NETFX_CORE
         private static Assembly LoadAssembly(string assemblyPath)
         {
@@ -234,7 +235,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
 #endif
 
 #if !SILVERLIGHT
-		static readonly Regex versionRegEx = new Regex(", Version=[^\\]]+", RegexOptions.Compiled);
+        static readonly Regex versionRegEx = new Regex(", Version=[^\\]]+", RegexOptions.Compiled);
 #else
         static readonly Regex versionRegEx = new Regex(", Version=[^\\]]+");
 #endif

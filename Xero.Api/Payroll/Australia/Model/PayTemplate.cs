@@ -19,6 +19,6 @@ namespace Xero.Api.Payroll.Australia.Model
         public List<SuperLine> SuperLines { get; set; }
 
         [DataMember]
-        public List<LeaveLine> LeaveLines { get; set; } 
+        public List<LeaveLine> LeaveLines { get; set; }
     }
 }

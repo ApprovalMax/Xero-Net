@@ -203,7 +203,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
             switch (typeCode)
             {
                 case TypeCode.SByte:
-                    writer.Write((sbyte) enumFlagValue);
+                    writer.Write((sbyte)enumFlagValue);
                     break;
                 case TypeCode.Byte:
                     writer.Write((byte)enumFlagValue);
@@ -242,10 +242,10 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
         public JsWriter()
         {
             this.SpecialTypes = new Dictionary<Type, WriteObjectDelegate>
-        	{
-        		{ typeof(Uri), Serializer.WriteObjectString },
-        		{ typeof(Type), WriteType },
-        		{ typeof(Exception), Serializer.WriteException },
+            {
+                { typeof(Uri), Serializer.WriteObjectString },
+                { typeof(Type), WriteType },
+                { typeof(Exception), Serializer.WriteException },
 #if !MONOTOUCH && !SILVERLIGHT && !XBOX  && !ANDROID
                 { typeof(System.Data.Linq.Binary), Serializer.WriteLinqBinary },
 #endif
@@ -320,7 +320,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
                     ? (WriteObjectDelegate)Serializer.WriteEnumFlags
                     : Serializer.WriteEnum;
 
-            if (type.HasInterface(typeof (IFormattable)))
+            if (type.HasInterface(typeof(IFormattable)))
                 return Serializer.WriteFormattableObjectString;
 
             return Serializer.WriteObjectString;

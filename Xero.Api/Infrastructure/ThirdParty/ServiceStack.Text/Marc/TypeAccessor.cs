@@ -26,7 +26,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Marc
         /// <summary>
         /// Create a new instance of this type
         /// </summary>
-        public virtual object CreateNew() { throw new NotSupportedException();}
+        public virtual object CreateNew() { throw new NotSupportedException(); }
 
         /// <summary>
         /// Provides a type-specific accessor, allowing by-name access for all objects of that type
@@ -34,11 +34,11 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Marc
         /// <remarks>The accessor is cached internally; a pre-existing accessor may be returned</remarks>
         public static TypeAccessor Create(Type type)
         {
-            if(type == null) throw new ArgumentNullException("type");
+            if (type == null) throw new ArgumentNullException("type");
             TypeAccessor obj = (TypeAccessor)typeLookyp[type];
             if (obj != null) return obj;
 
-            lock(typeLookyp)
+            lock (typeLookyp)
             {
                 // double-check
                 obj = (TypeAccessor)typeLookyp[type];
@@ -51,16 +51,16 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Marc
             }
         }
 
-		//sealed class DynamicAccessor : TypeAccessor
-		//{
-		//    public static readonly DynamicAccessor Singleton = new DynamicAccessor();
-		//    private DynamicAccessor(){}
-		//    public override object this[object target, string name]
-		//    {
-		//        get { return CallSiteCache.GetValue(name, target); }
-		//        set { CallSiteCache.SetValue(name, target, value); }
-		//    }
-		//}
+        //sealed class DynamicAccessor : TypeAccessor
+        //{
+        //    public static readonly DynamicAccessor Singleton = new DynamicAccessor();
+        //    private DynamicAccessor(){}
+        //    public override object this[object target, string name]
+        //    {
+        //        get { return CallSiteCache.GetValue(name, target); }
+        //        set { CallSiteCache.SetValue(name, target, value); }
+        //    }
+        //}
 
         private static AssemblyBuilder assembly;
         private static ModuleBuilder module;
@@ -200,27 +200,27 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Marc
         }
         static TypeAccessor CreateNew(Type type)
         {
-			//if (typeof(IDynamicMetaObjectProvider).IsAssignableFrom(type))
-			//{
-			//    return DynamicAccessor.Singleton;
-			//}
+            //if (typeof(IDynamicMetaObjectProvider).IsAssignableFrom(type))
+            //{
+            //    return DynamicAccessor.Singleton;
+            //}
 
             PropertyInfo[] props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
             FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
             ConstructorInfo ctor = null;
-            if(type.IsClass && !type.IsAbstract)
+            if (type.IsClass && !type.IsAbstract)
             {
                 ctor = type.GetConstructor(Type.EmptyTypes);
             }
             ILGenerator il;
-            if(!IsFullyPublic(type))
+            if (!IsFullyPublic(type))
             {
                 DynamicMethod dynGetter = new DynamicMethod(type.FullName + "_get", typeof(object), new Type[] { typeof(object), typeof(string) }, type, true),
                               dynSetter = new DynamicMethod(type.FullName + "_set", null, new Type[] { typeof(object), typeof(string), typeof(object) }, type, true);
                 WriteGetter(dynGetter.GetILGenerator(), type, props, fields, true);
                 WriteSetter(dynSetter.GetILGenerator(), type, props, fields, true);
                 DynamicMethod dynCtor = null;
-                if(ctor != null)
+                if (ctor != null)
                 {
                     dynCtor = new DynamicMethod(type.FullName + "_ctor", typeof(object), Type.EmptyTypes, type, true);
                     il = dynCtor.GetILGenerator();
@@ -228,25 +228,25 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Marc
                     il.Emit(OpCodes.Ret);
                 }
                 return new DelegateAccessor(
-                    (Func<object,string,object>)dynGetter.CreateDelegate(typeof(Func<object,string,object>)),
-                    (Action<object,string,object>)dynSetter.CreateDelegate(typeof(Action<object,string,object>)),
+                    (Func<object, string, object>)dynGetter.CreateDelegate(typeof(Func<object, string, object>)),
+                    (Action<object, string, object>)dynSetter.CreateDelegate(typeof(Action<object, string, object>)),
                     dynCtor == null ? null : (Func<object>)dynCtor.CreateDelegate(typeof(Func<object>)));
             }
 
             // note this region is synchronized; only one is being created at a time so we don't need to stress about the builders
-            if(assembly == null)
+            if (assembly == null)
             {
                 AssemblyName name = new AssemblyName("FastMember_dynamic");
                 assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(name, AssemblyBuilderAccess.Run);
                 module = assembly.DefineDynamicModule(name.Name);
             }
             TypeBuilder tb = module.DefineType("FastMember_dynamic." + type.Name + "_" + Interlocked.Increment(ref counter),
-                (typeof(TypeAccessor).Attributes | TypeAttributes.Sealed) & ~TypeAttributes.Abstract, typeof(TypeAccessor) );
+                (typeof(TypeAccessor).Attributes | TypeAttributes.Sealed) & ~TypeAttributes.Abstract, typeof(TypeAccessor));
 
             tb.DefineDefaultConstructor(MethodAttributes.Public);
-            PropertyInfo indexer = typeof (TypeAccessor).GetProperty("Item");
+            PropertyInfo indexer = typeof(TypeAccessor).GetProperty("Item");
             MethodInfo baseGetter = indexer.GetGetMethod(), baseSetter = indexer.GetSetMethod();
-            MethodBuilder body = tb.DefineMethod(baseGetter.Name, baseGetter.Attributes & ~MethodAttributes.Abstract, typeof(object), new Type[] {typeof(object), typeof(string)});
+            MethodBuilder body = tb.DefineMethod(baseGetter.Name, baseGetter.Attributes & ~MethodAttributes.Abstract, typeof(object), new Type[] { typeof(object), typeof(string) });
             il = body.GetILGenerator();
             WriteGetter(il, type, props, fields, false);
             tb.DefineMethodOverride(body, baseGetter);
@@ -256,17 +256,17 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Marc
             WriteSetter(il, type, props, fields, false);
             tb.DefineMethodOverride(body, baseSetter);
 
-            if(ctor != null)
+            if (ctor != null)
             {
-                MethodInfo baseMethod = typeof (TypeAccessor).GetProperty("CreateNewSupported").GetGetMethod();
-                body = tb.DefineMethod(baseMethod.Name, baseMethod.Attributes, typeof (bool), Type.EmptyTypes);
+                MethodInfo baseMethod = typeof(TypeAccessor).GetProperty("CreateNewSupported").GetGetMethod();
+                body = tb.DefineMethod(baseMethod.Name, baseMethod.Attributes, typeof(bool), Type.EmptyTypes);
                 il = body.GetILGenerator();
                 il.Emit(OpCodes.Ldc_I4_1);
                 il.Emit(OpCodes.Ret);
                 tb.DefineMethodOverride(body, baseMethod);
 
-                baseMethod = typeof (TypeAccessor).GetMethod("CreateNew");
-                body = tb.DefineMethod(baseMethod.Name, baseMethod.Attributes, typeof (object), Type.EmptyTypes);
+                baseMethod = typeof(TypeAccessor).GetMethod("CreateNew");
+                body = tb.DefineMethod(baseMethod.Name, baseMethod.Attributes, typeof(object), Type.EmptyTypes);
                 il = body.GetILGenerator();
                 il.Emit(OpCodes.Newobj, ctor);
                 il.Emit(OpCodes.Ret);
@@ -278,8 +278,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Marc
 
         private static void Cast(ILGenerator il, Type type, LocalBuilder addr)
         {
-            if(type == typeof(object)) {}
-            else if(type.IsValueType)
+            if (type == typeof(object)) { }
+            else if (type.IsValueType)
             {
                 il.Emit(OpCodes.Unbox_Any, type);
                 if (addr != null)

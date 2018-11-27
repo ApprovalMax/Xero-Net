@@ -103,6 +103,6 @@ namespace Xero.Api.Core.Model
         public List<ContactGroup> ContactGroups { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public string AccountNumber { get; set; } 
+        public string AccountNumber { get; set; }
     }
 }

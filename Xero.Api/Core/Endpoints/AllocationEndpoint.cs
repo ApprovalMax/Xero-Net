@@ -12,7 +12,7 @@ namespace Xero.Api.Core.Endpoints
     public class AllocationsEndpoint
     {
         private readonly XeroHttpClient _client;
-        
+
         public AllocationsEndpoint(XeroHttpClient client)
         {
             _client = client;
@@ -80,5 +80,5 @@ namespace Xero.Api.Core.Endpoints
         {
             get { return Allocations; }
         }
-    }     
+    }
 }

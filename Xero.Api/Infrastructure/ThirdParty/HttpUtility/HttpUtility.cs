@@ -40,32 +40,33 @@ using System.Web;
 
 namespace Xero.Api.Infrastructure.ThirdParty.HttpUtility
 {
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class HttpUtility
-	{
-		sealed class HttpQsCollection : NameValueCollection
-		{
-			public override string ToString ()
-			{
-				int count = Count;
-				if (count == 0)
-					return "";
-				var sb = new StringBuilder ();
-				string [] keys = AllKeys;
-				for (int i = 0; i < count; i++) {
-					sb.AppendFormat ("{0}={1}&", keys [i], this [keys [i]]);
-				}
-				if (sb.Length > 0)
-					sb.Length--;
-				return sb.ToString ();
-			}
-		}
-		
-        public static string UrlDecode (string str)
+    [AspNetHostingPermission(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public sealed class HttpUtility
+    {
+        sealed class HttpQsCollection : NameValueCollection
+        {
+            public override string ToString()
+            {
+                int count = Count;
+                if (count == 0)
+                    return "";
+                var sb = new StringBuilder();
+                string[] keys = AllKeys;
+                for (int i = 0; i < count; i++)
+                {
+                    sb.AppendFormat("{0}={1}&", keys[i], this[keys[i]]);
+                }
+                if (sb.Length > 0)
+                    sb.Length--;
+                return sb.ToString();
+            }
+        }
+
+        public static string UrlDecode(string str)
         {
             return UrlDecode(str, Encoding.UTF8);
         }
-	
+
         static void WriteCharBytes(IList buf, char ch, Encoding e)
         {
             if (ch > 255)
@@ -132,7 +133,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.HttpUtility
             return e.GetString(buf);
 
         }
-	
+
         static int GetInt(byte b)
         {
             var c = (char)b;
@@ -166,8 +167,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.HttpUtility
 
             return val;
         }
-		
-        public static string HtmlDecode (string s) 
+
+        public static string HtmlDecode(string s)
         {
             if (s == null)
                 return null;
@@ -270,75 +271,87 @@ namespace Xero.Api.Infrastructure.ThirdParty.HttpUtility
         {
             if (bytes == null)
                 return null;
-			return HttpEncoder.UrlEncode (bytes, offset, count);
+            return HttpEncoder.UrlEncode(bytes, offset, count);
         }
-	
-		public static NameValueCollection ParseQueryString (string query)
-		{
-			return ParseQueryString (query, Encoding.UTF8);
-		}
 
-		public static NameValueCollection ParseQueryString (string query, Encoding encoding)
-		{
-			if (query == null)
-				throw new ArgumentNullException ("query");
-			if (encoding == null)
-				throw new ArgumentNullException ("encoding");
-			if (query.Length == 0 || (query.Length == 1 && query[0] == '?'))
-				return new HttpQsCollection ();
-			if (query[0] == '?')
-				query = query.Substring (1);
-				
-			NameValueCollection result = new HttpQsCollection ();
-			ParseQueryString (query, encoding, result);
-			return result;
-		}
+        public static NameValueCollection ParseQueryString(string query)
+        {
+            return ParseQueryString(query, Encoding.UTF8);
+        }
 
-		public static void ParseQueryString (string query, Encoding encoding, NameValueCollection result)
-		{
-			if (query.Length == 0)
-				return;
+        public static NameValueCollection ParseQueryString(string query, Encoding encoding)
+        {
+            if (query == null)
+                throw new ArgumentNullException("query");
+            if (encoding == null)
+                throw new ArgumentNullException("encoding");
+            if (query.Length == 0 || (query.Length == 1 && query[0] == '?'))
+                return new HttpQsCollection();
+            if (query[0] == '?')
+                query = query.Substring(1);
 
-			string decoded = HtmlDecode (query);
-			int decodedLength = decoded.Length;
-			int namePos = 0;
-			bool first = true;
-			while (namePos <= decodedLength) {
-				int valuePos = -1, valueEnd = -1;
-				for (int q = namePos; q < decodedLength; q++) {
-					if (valuePos == -1 && decoded [q] == '=') {
-						valuePos = q + 1;
-					} else if (decoded [q] == '&') {
-						valueEnd = q;
-						break;
-					}
-				}
+            NameValueCollection result = new HttpQsCollection();
+            ParseQueryString(query, encoding, result);
+            return result;
+        }
 
-				if (first) {
-					first = false;
-					if (decoded [namePos] == '?')
-						namePos++;
-				}
-				
-				string name;
-				if (valuePos == -1) {
-					name = null;
-					valuePos = namePos;
-				} else {
-					name = UrlDecode (decoded.Substring (namePos, valuePos - namePos - 1), encoding);
-				}
-				if (valueEnd < 0) {
-					namePos = -1;
-					valueEnd = decoded.Length;
-				} else {
-					namePos = valueEnd + 1;
-				}
-				string value = UrlDecode (decoded.Substring (valuePos, valueEnd - valuePos), encoding);
+        public static void ParseQueryString(string query, Encoding encoding, NameValueCollection result)
+        {
+            if (query.Length == 0)
+                return;
 
-				result.Add (name, value);
-				if (namePos == -1)
-					break;
-			}
-		}		
-	}    
+            string decoded = HtmlDecode(query);
+            int decodedLength = decoded.Length;
+            int namePos = 0;
+            bool first = true;
+            while (namePos <= decodedLength)
+            {
+                int valuePos = -1, valueEnd = -1;
+                for (int q = namePos; q < decodedLength; q++)
+                {
+                    if (valuePos == -1 && decoded[q] == '=')
+                    {
+                        valuePos = q + 1;
+                    }
+                    else if (decoded[q] == '&')
+                    {
+                        valueEnd = q;
+                        break;
+                    }
+                }
+
+                if (first)
+                {
+                    first = false;
+                    if (decoded[namePos] == '?')
+                        namePos++;
+                }
+
+                string name;
+                if (valuePos == -1)
+                {
+                    name = null;
+                    valuePos = namePos;
+                }
+                else
+                {
+                    name = UrlDecode(decoded.Substring(namePos, valuePos - namePos - 1), encoding);
+                }
+                if (valueEnd < 0)
+                {
+                    namePos = -1;
+                    valueEnd = decoded.Length;
+                }
+                else
+                {
+                    namePos = valueEnd + 1;
+                }
+                string value = UrlDecode(decoded.Substring(valuePos, valueEnd - valuePos), encoding);
+
+                result.Add(name, value);
+                if (namePos == -1)
+                    break;
+            }
+        }
+    }
 }

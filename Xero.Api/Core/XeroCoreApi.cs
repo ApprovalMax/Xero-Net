@@ -24,7 +24,7 @@ namespace Xero.Api.Core
         {
             Connect();
         }
-        
+
         public XeroCoreApi(string baseUri, IAuthenticator auth, IConsumer consumer, IUser user)
             : this(baseUri, auth, consumer, user, null)
         {
@@ -42,7 +42,7 @@ namespace Xero.Api.Core
         public IBankTransfersEndpoint BankTransfers { get; private set; }
         public IBrandingThemesEndpoint BrandingThemes { get; private set; }
         public IContactsEndpoint Contacts { get; private set; }
-        public IContactGroupsEndpoint ContactGroups { get; private set;}
+        public IContactGroupsEndpoint ContactGroups { get; private set; }
         public ICreditNotesEndpoint CreditNotes { get; private set; }
         public ICurrenciesEndpoint Currencies { get; set; }
         public IEmployeesEndpoint Employees { get; private set; }
@@ -205,7 +205,7 @@ namespace Xero.Api.Core
         }
 
         #endregion
-        
+
         #region ContactGroups
 
         public IEnumerable<ContactGroup> Create(IEnumerable<ContactGroup> items)

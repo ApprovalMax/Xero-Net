@@ -10,7 +10,7 @@ namespace Xero.Api.Payroll.Australia.Model
     {
         [DataMember(Name = "SuperFundID", EmitDefaultValue = false)]
         public Guid Id { get; set; }
-        
+
         [DataMember(Name = "ABN")]
         // Australian Business Number
         public string Abn { get; set; }
@@ -18,11 +18,11 @@ namespace Xero.Api.Payroll.Australia.Model
         [DataMember(Name = "SPIN")]
         // Superannuation Product Identification Number 
         public string Spin { get; private set; }
-        
+
         [DataMember(Name = "USI")]
         //Unique superannuation identifier
         public string Usi { get; set; }
-        
+
         [DataMember]
         public SuperfundType Type { get; set; }
 
@@ -31,15 +31,15 @@ namespace Xero.Api.Payroll.Australia.Model
 
         [DataMember]
         public string AccountNumber { get; set; }
-        
-        [DataMember(Name ="BSB")]
+
+        [DataMember(Name = "BSB")]
         public string BankStateBranch { get; set; }
 
         [DataMember]
         public string EmployerNumber { get; set; }
-        
+
         [DataMember]
-        public string  ElectronicServiceAddress { get; set; }
+        public string ElectronicServiceAddress { get; set; }
 
         [DataMember]
         public string Name { get; set; }

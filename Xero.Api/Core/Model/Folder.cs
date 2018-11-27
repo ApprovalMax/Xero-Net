@@ -14,7 +14,7 @@ namespace Xero.Api.Core.Model
 
         [DataMember(EmitDefaultValue = false)]
         public bool IsInbox { get; set; }
-        
+
         [DataMember(EmitDefaultValue = false)]
         public int FileCount { get; set; }
     }

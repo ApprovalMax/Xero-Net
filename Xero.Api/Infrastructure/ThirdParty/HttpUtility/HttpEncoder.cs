@@ -43,7 +43,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.HttpUtility
         static readonly char[] HexChars = "0123456789abcdef".ToCharArray();
         static readonly object EntitiesLock = new object();
         static SortedDictionary<string, char> _entities;
-        
+
         private static IDictionary<string, char> Entities
         {
             get
@@ -319,17 +319,17 @@ namespace Xero.Api.Infrastructure.ThirdParty.HttpUtility
             };
         }
 
-        public static string UrlPathEncode (string value)
+        public static string UrlPathEncode(string value)
         {
-            if (String.IsNullOrEmpty (value))
+            if (String.IsNullOrEmpty(value))
                 return value;
 
-            var result = new MemoryStream ();
+            var result = new MemoryStream();
             int length = value.Length;
             for (int i = 0; i < length; i++)
-                UrlPathEncodeChar (value [i], result);
+                UrlPathEncodeChar(value[i], result);
 
-            return Encoding.ASCII.GetString (result.ToArray ());
+            return Encoding.ASCII.GetString(result.ToArray());
         }
 
         internal static byte[] UrlEncodeToBytes(byte[] bytes, int offset, int count)
@@ -456,7 +456,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.HttpUtility
 
             if (s.IndexOf('&') == -1)
                 return s;
-            
+
             var rawEntity = new StringBuilder();
             var entity = new StringBuilder();
             var output = new StringBuilder();
@@ -551,15 +551,15 @@ namespace Xero.Api.Infrastructure.ThirdParty.HttpUtility
                             output.Append(rawEntity + ";");
                         else
                             if (number > 65535)
-                            {
-                                output.Append("&#");
-                                output.Append(number.ToString(CultureInfo.InvariantCulture));
-                                output.Append(";");
-                            }
-                            else
-                            {
-                                output.Append((char)number);
-                            }
+                        {
+                            output.Append("&#");
+                            output.Append(number.ToString(CultureInfo.InvariantCulture));
+                            output.Append(";");
+                        }
+                        else
+                        {
+                            output.Append((char)number);
+                        }
                         state = 0;
                         entity.Length = 0;
                         rawEntity.Length = 0;
@@ -686,6 +686,6 @@ namespace Xero.Api.Infrastructure.ThirdParty.HttpUtility
         public static byte[] UrlEncode(byte[] bytes, int offset, int count)
         {
             return UrlEncodeToBytes(bytes, offset, count);
-        }        
+        }
     }
 }

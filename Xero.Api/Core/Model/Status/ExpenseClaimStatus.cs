@@ -5,7 +5,7 @@ namespace Xero.Api.Core.Model.Status
     [DataContract(Namespace = "")]
     public enum ExpenseClaimStatus
     {
-        [EnumMember(Value= "SUBMITTED")]
+        [EnumMember(Value = "SUBMITTED")]
         Submitted,
         [EnumMember(Value = "AUTHORISED")]
         Authorised,

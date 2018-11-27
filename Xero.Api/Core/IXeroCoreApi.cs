@@ -120,13 +120,13 @@ namespace Xero.Api.Core
         ManualJournal Create(ManualJournal item);
         ManualJournal Update(ManualJournal item);
 
-        
+
         //Payments
         IEnumerable<Payment> Create(IEnumerable<Payment> items);
         IEnumerable<Payment> Update(IEnumerable<Payment> items);
         Payment Create(Payment item);
         Payment Update(Payment item);
-        
+
         //PurchaseOrders
         IEnumerable<PurchaseOrder> Create(IEnumerable<PurchaseOrder> items);
         IEnumerable<PurchaseOrder> Update(IEnumerable<PurchaseOrder> items);

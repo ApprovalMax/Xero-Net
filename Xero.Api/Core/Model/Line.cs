@@ -38,7 +38,7 @@ namespace Xero.Api.Core.Model
 
         [DataMember(EmitDefaultValue = false)]
         public string TaxName { get; set; }
-        
+
         //There is an inconsistency with TrackingCatgories on JournalLines between Journals and ManualJournals.
         //Use TrackingCategories with Journals
         [DataMember(EmitDefaultValue = false)]

@@ -2,7 +2,7 @@ using System.Runtime.Serialization;
 
 namespace Xero.Api.Payroll.Australia.Model.Status
 {
-    [DataContract(Namespace =  "")]
+    [DataContract(Namespace = "")]
     public enum LeavePeriodStatus
     {
         [EnumMember(Value = "PROCESSED")]

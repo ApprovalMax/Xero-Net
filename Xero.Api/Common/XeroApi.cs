@@ -36,6 +36,6 @@ namespace Xero.Api.Common
             {
                 Client.UserAgent = value;
             }
-        }        
+        }
     }
 }

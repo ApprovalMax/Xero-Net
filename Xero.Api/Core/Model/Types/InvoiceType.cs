@@ -8,6 +8,6 @@ namespace Xero.Api.Core.Model.Types
         [EnumMember(Value = "ACCPAY")]
         AccountsPayable,
         [EnumMember(Value = "ACCREC")]
-        AccountsReceivable        
+        AccountsReceivable
     }
 }

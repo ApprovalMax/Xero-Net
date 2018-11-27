@@ -105,7 +105,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
         {
             var method = member.DeclaringType.GetMethod("ShouldSerialize" + member.Name, BindingFlags.Instance | BindingFlags.Public,
                 null, Type.EmptyTypes, null);
-            return (method == null || method.ReturnType != typeof(bool)) ? null : (Func<T,bool>)Delegate.CreateDelegate(typeof(Func<T,bool>), method);
+            return (method == null || method.ReturnType != typeof(bool)) ? null : (Func<T, bool>)Delegate.CreateDelegate(typeof(Func<T, bool>), method);
         }
         private static bool Init()
         {
@@ -250,7 +250,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
             internal readonly object DefaultValue;
             internal readonly Func<T, bool> shouldSerialize;
 
-            public TypePropertyWriter(string propertyName, string propertyReflectedName, string propertyNameCLSFriendly, string propertyNameLowercaseUnderscore, int propertyOrder, bool propertySuppressDefaultConfig,bool propertySuppressDefaultAttribute,
+            public TypePropertyWriter(string propertyName, string propertyReflectedName, string propertyNameCLSFriendly, string propertyNameLowercaseUnderscore, int propertyOrder, bool propertySuppressDefaultConfig, bool propertySuppressDefaultAttribute,
                 Func<T, object> getterFn, WriteObjectDelegate writeFn, object defaultValue, Func<T, bool> shouldSerialize)
             {
                 this.propertyName = propertyName;
@@ -337,12 +337,12 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
                     var propertyValue = value != null
                         ? propertyWriter.GetterFn((T)value)
                         : null;
-                    
+
                     if (propertyWriter.propertySuppressDefaultAttribute && Equals(propertyWriter.DefaultValue, propertyValue))
                     {
                         continue;
                     }
-                    if ((propertyValue == null 
+                    if ((propertyValue == null
                          || (propertyWriter.propertySuppressDefaultConfig && Equals(propertyWriter.DefaultValue, propertyValue)))
                         && !Serializer.IncludeNullValues
                         )
@@ -406,12 +406,12 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
                         propertyWriter.WriteFn(writer, propertyValue);
                     }
                     else
-                    {                        
+                    {
                         //Trim brackets in top-level lists in QueryStrings, e.g: ?a=[1,2,3] => ?a=1,2,3
                         using (var ms = new MemoryStream())
                         using (var enumerableWriter = new StreamWriter(ms))
                         {
-                            propertyWriter.WriteFn(enumerableWriter, propertyValue); 
+                            propertyWriter.WriteFn(enumerableWriter, propertyValue);
                             enumerableWriter.Flush();
                             var output = ms.ToArray().FromUtf8Bytes();
                             output = output.Trim(ArrayBrackets);

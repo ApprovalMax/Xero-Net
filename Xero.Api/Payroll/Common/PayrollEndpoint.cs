@@ -27,7 +27,7 @@ namespace Xero.Api.Payroll.Common
 
         public TResult Create(TResult item)
         {
-            return Create(new [] { item }).First();
+            return Create(new[] { item }).First();
         }
 
         public IEnumerable<TResult> Update(IEnumerable<TResult> items)

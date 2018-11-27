@@ -19,7 +19,8 @@ namespace Xero.Api.Core.Model
         [DataMember]
         public int SortOrder { get; set; }
 
-        public Guid Id {
+        public Guid Id
+        {
             get { return this.BrandingThemeId; }
             set { this.BrandingThemeId = value; }
         }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Xero.Api.Common {
-    public static class XeroTimeZoneConverter {
+namespace Xero.Api.Common
+{
+    public static class XeroTimeZoneConverter
+    {
         private const string XERO_AFGHANISTAN_STANDARD_TIME = "AFGHANISTANSTANDARDTIME";
         private const string XERO_ALASKAN_STANDARD_TIME = "ALASKANSTANDARDTIME";
         private const string XERO_ARAB_STANDARD_TIME = "ARABIANSTANDARDTIME";
@@ -78,6 +78,7 @@ namespace Xero.Api.Common {
         private const string XERO_PARAGUAY_STANDARD_TIME = "PARAGUAYSTANDARDTIME";
         private const string XERO_ROMANCE_STANDARD_TIME = "ROMANCESTANDARDTIME";
         private const string XERO_RUSSIAN_STANDARD_TIME = "RUSSIANSTANDARDTIME";
+        private const string XERO_RUSSIA_TIMEZONE3_TIME = "RUSSIATIMEZONE3";
         private const string XERO_SA_EASTERN_STANDARD_TIME = "SAEASTERNSTANDARDTIME";
         private const string XERO_SA_PACIFIC_STANDARD_TIME = "SAPACIFICSTANDARDTIME";
         private const string XERO_SA_WESTERN_STANDARD_TIME = "SAWESTERNSTANDARDTIME";
@@ -177,6 +178,7 @@ namespace Xero.Api.Common {
         private const string PARAGUAY_STANDARD_TIME = "Paraguay Standard Time";
         private const string ROMANCE_STANDARD_TIME = "Romance Standard Time";
         private const string RUSSIAN_STANDARD_TIME = "Russian Standard Time";
+        private const string RUSSIAN_TIMEZONE3_TIME = "Russia Time Zone 3";
         private const string SA_EASTERN_STANDARD_TIME = "SA Eastern Standard Time";
         private const string SA_PACIFIC_STANDARD_TIME = "SA Pacific Standard Time";
         private const string SA_WESTERN_STANDARD_TIME = "SA Western Standard Time";
@@ -207,10 +209,12 @@ namespace Xero.Api.Common {
         private const string WEST_PACIFIC_STANDARD_TIME = "West Pacific Standard Time";
         private const string YAKUTSK_STANDARD_TIME = "Yakutsk Standard Time";
 
-        public static string GetTimeZoneIdFromXeroTimeZone(string xeroTimeZone) {
+        public static string GetTimeZoneIdFromXeroTimeZone(string xeroTimeZone)
+        {
             string timeZoneId;
 
-            switch (xeroTimeZone) {
+            switch (xeroTimeZone)
+            {
                 case XERO_AFGHANISTAN_STANDARD_TIME:
                     timeZoneId = AFGHANISTAN_STANDARD_TIME;
                     break;
@@ -427,6 +431,9 @@ namespace Xero.Api.Common {
                 case XERO_RUSSIAN_STANDARD_TIME:
                     timeZoneId = RUSSIAN_STANDARD_TIME;
                     break;
+                case XERO_RUSSIA_TIMEZONE3_TIME:
+                    timeZoneId = RUSSIAN_TIMEZONE3_TIME;
+                    break;
                 case XERO_SA_EASTERN_STANDARD_TIME:
                     timeZoneId = SA_EASTERN_STANDARD_TIME;
                     break;
@@ -515,7 +522,8 @@ namespace Xero.Api.Common {
 
             var timeZoneIds = new HashSet<string>(TimeZoneInfo.GetSystemTimeZones().Select(tz => tz.Id));
 
-            if (!timeZoneIds.Contains(timeZoneId)) {
+            if (!timeZoneIds.Contains(timeZoneId))
+            {
                 timeZoneId = string.Empty;
             }
 

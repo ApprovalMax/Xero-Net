@@ -4,68 +4,69 @@ using Xero.Api.Infrastructure.ThirdParty.Dust.Lang;
 
 namespace Xero.Api.Infrastructure.ThirdParty.Dust.Core.SignatureBaseStringParts.Parameters
 {
-	public class OAuthParameters
+    public class OAuthParameters
     {
         private readonly ConsumerKey _key;
         private readonly TokenKey _tokenKey;
         private readonly string _signatureMethod;
-	    private string _signature;
-    	private readonly string _version;
+        private string _signature;
+        private readonly string _version;
         private readonly string _nonce, _timestamp, _verifier, _session;
         private readonly bool _renewToken;
         private readonly string _callback;
 
-	    public static OAuthParameters Empty = new OAuthParameters(
-	        new ConsumerKey(string.Empty), 
-	        new TokenKey(string.Empty), 
-	        string.Empty, 
-	        new DefaultTimestampSequence(), 
-	        new DefaultNonceSequence(), 
-	        string.Empty,
-	        null
+        public static OAuthParameters Empty = new OAuthParameters(
+            new ConsumerKey(string.Empty),
+            new TokenKey(string.Empty),
+            string.Empty,
+            new DefaultTimestampSequence(),
+            new DefaultNonceSequence(),
+            string.Empty,
+            null
         );
 
-	    public OAuthParameters(
-			ConsumerKey key, 
-			TokenKey tokenKey, 
-			string signatureMethod, 
-			TimestampSequence timestamps, 
-			NonceSequence nonces, 
-			string signature, 
-			string version,
+        public OAuthParameters(
+            ConsumerKey key,
+            TokenKey tokenKey,
+            string signatureMethod,
+            TimestampSequence timestamps,
+            NonceSequence nonces,
+            string signature,
+            string version,
             string verifier = null,
             string session = null,
             bool renewToken = false,
             string callback = null
-		)
+        )
         {
-    	    _key = key;
+            _key = key;
             _tokenKey = tokenKey;
             _signatureMethod = signatureMethod;
-    	    _signature = signature;
-	        _session = session;
-	        _verifier = verifier;
-	        _version = version ?? "1.0";
+            _signature = signature;
+            _session = session;
+            _verifier = verifier;
+            _version = version ?? "1.0";
 
-    	    _nonce = nonces.Next();
-    	    _timestamp = timestamps.Next();
-	        _renewToken = renewToken;
-	        _callback = callback;
+            _nonce = nonces.Next();
+            _timestamp = timestamps.Next();
+            _renewToken = renewToken;
+            _callback = callback;
         }
 
-	    internal Parameters List() {
-    		return new Parameters(
-    				ConsumerKey,
-    				Version,
-    				SignatureMethod,
-    				Timestamp,
-    				Nonce
-				).Tap(it =>
+        internal Parameters List()
+        {
+            return new Parameters(
+                    ConsumerKey,
+                    Version,
+                    SignatureMethod,
+                    Timestamp,
+                    Nonce
+                ).Tap(it =>
                 {
-					if (_tokenKey.Exists)
+                    if (_tokenKey.Exists)
                     {
-    					it.Add(Token);
-					}
+                        it.Add(Token);
+                    }
 
                     if (!string.IsNullOrWhiteSpace(_verifier))
                     {
@@ -82,39 +83,47 @@ namespace Xero.Api.Infrastructure.ThirdParty.Dust.Core.SignatureBaseStringParts.
                         it.Add(Callback);
                     }
                 });
-    	}
+        }
 
-    	internal Parameter Token {
-    		get { return new Parameter(Name.Token, _tokenKey.Value); }
-    	}
+        internal Parameter Token
+        {
+            get { return new Parameter(Name.Token, _tokenKey.Value); }
+        }
 
-    	internal Parameter ConsumerKey {
-    		get { return new Parameter(Name.ConsumerKey, _key.Value); }
-    	}
+        internal Parameter ConsumerKey
+        {
+            get { return new Parameter(Name.ConsumerKey, _key.Value); }
+        }
 
-    	internal Parameter SignatureMethod {
-    		get { return new Parameter(Name.SignatureMethod, _signatureMethod); }
-    	}
+        internal Parameter SignatureMethod
+        {
+            get { return new Parameter(Name.SignatureMethod, _signatureMethod); }
+        }
 
-		public void SetSignature(string what) {
-			_signature = what;
-		}
+        public void SetSignature(string what)
+        {
+            _signature = what;
+        }
 
-		internal Parameter Signature {
-    		get { return new Parameter(Name.Signature, _signature); }
-    	}
+        internal Parameter Signature
+        {
+            get { return new Parameter(Name.Signature, _signature); }
+        }
 
-    	internal Parameter Timestamp {
-    		get { return new Parameter(Name.Timestamp, _timestamp); }
-    	}
+        internal Parameter Timestamp
+        {
+            get { return new Parameter(Name.Timestamp, _timestamp); }
+        }
 
-    	internal Parameter Nonce {
-    		get { return new Parameter(Name.Nonce, _nonce); }
-    	}
+        internal Parameter Nonce
+        {
+            get { return new Parameter(Name.Nonce, _nonce); }
+        }
 
-    	internal Parameter Version {
-    		get { return new Parameter(Name.Version, _version); }
-    	}
+        internal Parameter Version
+        {
+            get { return new Parameter(Name.Version, _version); }
+        }
 
         internal Parameter Verifier
         {

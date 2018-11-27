@@ -50,7 +50,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
                 return ParseStringCollection<TSerializer>;
             }
 #endif
-            if (typeof (T) == typeof (IEnumerable) || typeof(T) == typeof(ICollection))
+            if (typeof(T) == typeof(IEnumerable) || typeof(T) == typeof(ICollection))
             {
                 return GetEnumerableParseFn();
             }
@@ -118,7 +118,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
         internal static ParseStringDelegate GetGenericStackParseFn()
         {
             var enumerableInterface = typeof(T).GetTypeWithGenericInterfaceOf(typeof(IEnumerable<>));
-            
+
             var elementType = enumerableInterface.GenericTypeArguments()[0];
             var genericType = typeof(SpecializedQueueElements<>).MakeGenericType(elementType);
             var mi = genericType.GetPublicStaticMethod("ConvertToStack");
@@ -137,7 +137,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
         public static ParseStringDelegate GetGenericEnumerableParseFn()
         {
             var enumerableInterface = typeof(T).GetTypeWithGenericInterfaceOf(typeof(IEnumerable<>));
-            if (enumerableInterface == null) return null; 
+            if (enumerableInterface == null) return null;
             var elementType = enumerableInterface.GenericTypeArguments()[0];
             var genericType = typeof(SpecializedEnumerableElements<,>).MakeGenericType(typeof(T), elementType);
             var fi = genericType.GetPublicStaticField("ConvertFn");

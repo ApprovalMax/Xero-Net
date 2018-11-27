@@ -4,7 +4,7 @@ using Xero.Api.Infrastructure.Interfaces;
 
 namespace Xero.Api.Common
 {
-    public interface IXeroReadEndpoint<T, TResult, TResponse> 
+    public interface IXeroReadEndpoint<T, TResult, TResponse>
         where T : XeroReadEndpoint<T, TResult, TResponse>
         where TResponse : IXeroResponse<TResult>, new()
     {

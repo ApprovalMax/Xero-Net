@@ -8,7 +8,7 @@ namespace Xero.Api.Core.Endpoints
     public interface IBrandingThemesEndpoint :
         IXeroReadEndpoint<BrandingThemesEndpoint, BrandingTheme, BrandingThemesResponse>
     {
-        
+
     }
 
     public class BrandingThemesEndpoint : XeroReadEndpoint<BrandingThemesEndpoint, BrandingTheme, BrandingThemesResponse>, IBrandingThemesEndpoint

@@ -17,13 +17,13 @@ namespace Xero.Api.Core.Endpoints
         Folder InboxFolder { get; }
     }
 
-    public class InboxEndpoint : XeroUpdateEndpoint<InboxEndpoint,Model.Folder,FolderRequest,FolderResponse>, IInboxEndpoint
+    public class InboxEndpoint : XeroUpdateEndpoint<InboxEndpoint, Model.Folder, FolderRequest, FolderResponse>, IInboxEndpoint
     {
 
         internal InboxEndpoint(XeroHttpClient client)
             : base(client, "files.xro/1.0/Inbox")
         {
-            
+
         }
 
         private Guid Inbox
@@ -36,7 +36,7 @@ namespace Xero.Api.Core.Endpoints
                     .Client
                     .Get(endpoint, null));
 
-                return folder.Id; 
+                return folder.Id;
             }
 
         }
@@ -63,13 +63,13 @@ namespace Xero.Api.Core.Endpoints
 
             var response = HandleFileResponse(Client
                 .Client
-                .PostMultipartForm("files.xro/1.0/Files/" + Inbox, file.Mimetype , file.Name, file.Name, data));
+                .PostMultipartForm("files.xro/1.0/Files/" + Inbox, file.Mimetype, file.Name, file.Name, data));
 
             return response;
         }
 
 
-     
+
 
         public FilesResponse Remove(Guid fileid)
         {
@@ -108,7 +108,7 @@ namespace Xero.Api.Core.Endpoints
 
             return null;
         }
-      
+
 
         public Folder InboxFolder
         {

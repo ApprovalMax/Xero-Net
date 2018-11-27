@@ -10,16 +10,16 @@ namespace Xero.Api.Core.Model
     {
         [DataMember(Name = "EmployeeID", EmitDefaultValue = false)]
         public Guid Id { get; set; }
-        
+
         [DataMember]
         public EmployeeStatus Status { get; set; }
-        
+
         [DataMember]
         public string FirstName { get; set; }
 
         [DataMember]
         public string LastName { get; set; }
-        
+
         [DataMember(EmitDefaultValue = false)]
         public ExternalLink ExternalLink { get; set; }
     }

@@ -17,24 +17,24 @@ namespace Xero.Api.Core.Endpoints
         ContactGroup Add(ContactGroup contactGroup);
     }
 
-    public class ContactGroupsEndpoint : XeroUpdateEndpoint<ContactGroupsEndpoint,ContactGroup,ContactGroupsRequest,ContactGroupsResponse>,
+    public class ContactGroupsEndpoint : XeroUpdateEndpoint<ContactGroupsEndpoint, ContactGroup, ContactGroupsRequest, ContactGroupsResponse>,
         IContactGroupsEndpoint
     {
 
-        public ContactGroupsEndpoint(XeroHttpClient client) : base(client,"/api.xro/2.0/ContactGroups")
+        public ContactGroupsEndpoint(XeroHttpClient client) : base(client, "/api.xro/2.0/ContactGroups")
         {
-            
+
         }
 
         public IContactCollection this[Guid guid]
         {
             get
             {
-                var endpoint = string.Format("/api.xro/2.0/ContactGroups/{0}",guid);
+                var endpoint = string.Format("/api.xro/2.0/ContactGroups/{0}", guid);
 
                 var group = HandleResponse(Client
                     .Client
-                    .Get(endpoint,null))
+                    .Get(endpoint, null))
                     .ContactGroups.SingleOrDefault();
 
                 var collection = new ContactCollection(Client, group);
@@ -54,7 +54,7 @@ namespace Xero.Api.Core.Endpoints
 
             return groups.FirstOrDefault();
         }
-        
+
         private ContactGroupsResponse HandleResponse(Infrastructure.Http.Response response)
         {
             if (response.StatusCode == HttpStatusCode.OK)
@@ -78,7 +78,7 @@ namespace Xero.Api.Core.Endpoints
         void Remove(Guid guid);
     }
 
-    public class ContactCollection  : XeroUpdateEndpoint<ContactGroupsEndpoint, ContactGroup, ContactGroupsRequest, ContactGroupsResponse>, IContactCollection
+    public class ContactCollection : XeroUpdateEndpoint<ContactGroupsEndpoint, ContactGroup, ContactGroupsRequest, ContactGroupsResponse>, IContactCollection
     {
         private readonly ContactGroup _group;
         private readonly XeroHttpClient _client;
@@ -105,14 +105,14 @@ namespace Xero.Api.Core.Endpoints
             var contactList = new List<Contact>();
 
             contactList.Add(contact);
-            
+
             AssignContacts(_group, contactList);
 
         }
 
         public void AddRange(List<Contact> contacts)
         {
-            AssignContacts(_group,contacts);
+            AssignContacts(_group, contacts);
         }
 
         public void Remove(Guid guid)

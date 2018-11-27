@@ -23,6 +23,6 @@ namespace Xero.Api.Payroll.Australia.Model
         public decimal Super { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public List<Payslip> Payslips { get; set; }        
+        public List<Payslip> Payslips { get; set; }
     }
 }

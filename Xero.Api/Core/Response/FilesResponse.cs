@@ -23,8 +23,8 @@ namespace Xero.Api.Core.Response
         public string Name { get; set; }
 
         public bool IsInbox { get; set; }
-        
-        public IList<Model.FilePage>  Files { get; set; }
+
+        public IList<Model.FilePage> Files { get; set; }
 
         public override IList<Model.FilePage> Values
         {
@@ -32,12 +32,12 @@ namespace Xero.Api.Core.Response
         }
 
 
-        public Model.File this [Guid guid]
+        public Model.File this[Guid guid]
         {
             get
             {
                 return Files.Single().Items.SingleOrDefault(i => i.Id == guid);
-                
+
             }
         }
 

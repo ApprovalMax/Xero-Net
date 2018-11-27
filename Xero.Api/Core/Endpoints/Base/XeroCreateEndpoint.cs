@@ -45,8 +45,8 @@ namespace Xero.Api.Core.Endpoints.Base
             }
             finally
             {
-                ClearQueryString();            
+                ClearQueryString();
             }
-        }        
+        }
     }
 }

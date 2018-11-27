@@ -12,7 +12,7 @@ namespace Xero.Api.Core.Model
     {
         [DataMember(Name = "ReceiptID", EmitDefaultValue = false)]
         public Guid Id { get; set; }
-        
+
         [DataMember]
         public DateTime Date { get; set; }
 
@@ -50,6 +50,6 @@ namespace Xero.Api.Core.Model
         public bool? HasAttachments { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public string Url { get; set; }        
+        public string Url { get; set; }
     }
 }

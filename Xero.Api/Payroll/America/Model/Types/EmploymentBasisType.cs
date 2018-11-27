@@ -12,6 +12,6 @@ namespace Xero.Api.Payroll.America.Model.Types
         [EnumMember(Value = "PAIDLEAVE")]
         PaidLeave,
         [EnumMember(Value = "UNPAIDLEAVE ")]
-        UnpaidLeave 
+        UnpaidLeave
     }
 }

@@ -17,11 +17,11 @@ namespace Xero.Api.Core.Model
 
         [DataMember(EmitDefaultValue = false)]
         public string PhoneNumber { get; set; }
-        
+
         [DataMember(EmitDefaultValue = false)]
         public string PhoneAreaCode { get; set; }
-        
+
         [DataMember(EmitDefaultValue = false)]
-        public string PhoneCountryCode { get; set; }        
+        public string PhoneCountryCode { get; set; }
     }
 }

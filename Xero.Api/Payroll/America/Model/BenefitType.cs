@@ -10,10 +10,10 @@ namespace Xero.Api.Payroll.America.Model
     {
         [DataMember(Name = "BenefitTypeID")]
         public Guid Id { get; set; }
-        
+
         [DataMember(Name = "BenefitType")]
         public string Name { get; set; }
-        
+
         [DataMember]
         public BenefitCategoryType BenefitCategoryType { get; set; }
 

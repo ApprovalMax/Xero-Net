@@ -22,5 +22,5 @@ namespace Xero.Api.Payroll.Australia.Model
 
         [DataMember]
         public decimal? Amount { get; set; }
-    } 
+    }
 }

@@ -19,7 +19,7 @@ namespace Xero.Api.Core.Model
 
         [DataMember(EmitDefaultValue = false)]
         public PaymentStatus Status { get; set; }
-        
+
         [DataMember]
         public DateTime Date { get; set; }
 

@@ -10,7 +10,7 @@ namespace Xero.Api.Payroll.America.Model
     {
         [DataMember(Name = "TimeOffTypeID")]
         public Guid Id { get; set; }
-        
+
         [DataMember(Name = "TimeOffType")]
         public string Name { get; set; }
 

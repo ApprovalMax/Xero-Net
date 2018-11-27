@@ -6,7 +6,7 @@ namespace Xero.Api.Common
     public class XeroRequest<T> : List<T>, IXeroRequest<T>
     {
         public XeroRequest()
-        {    
+        {
         }
 
         public XeroRequest(IEnumerable<T> items)

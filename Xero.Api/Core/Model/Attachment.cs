@@ -22,6 +22,6 @@ namespace Xero.Api.Core.Model
         public Guid Id { get; set; }
 
         [DataMember]
-        public bool IncludeOnline { get; set; }        
+        public bool IncludeOnline { get; set; }
     }
 }

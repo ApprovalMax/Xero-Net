@@ -18,12 +18,12 @@ using Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common;
 
 namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Jsv
 {
-	internal static class JsvWriter
-	{
-		public static readonly JsWriter<JsvTypeSerializer> Instance = new JsWriter<JsvTypeSerializer>();
+    internal static class JsvWriter
+    {
+        public static readonly JsWriter<JsvTypeSerializer> Instance = new JsWriter<JsvTypeSerializer>();
 
         private static Dictionary<Type, WriteObjectDelegate> WriteFnCache = new Dictionary<Type, WriteObjectDelegate>();
-        
+
         internal static void RemoveCacheFn(Type forType)
         {
             Dictionary<Type, WriteObjectDelegate> snapshot, newCache;
@@ -32,15 +32,15 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Jsv
                 snapshot = WriteFnCache;
                 newCache = new Dictionary<Type, WriteObjectDelegate>(WriteFnCache);
                 newCache.Remove(forType);
-                
+
             } while (!ReferenceEquals(
                 Interlocked.CompareExchange(ref WriteFnCache, newCache, snapshot), snapshot));
         }
 
-		public static WriteObjectDelegate GetWriteFn(Type type)
-		{
-			try
-			{
+        public static WriteObjectDelegate GetWriteFn(Type type)
+        {
+            try
+            {
                 WriteObjectDelegate writeFn;
                 if (WriteFnCache.TryGetValue(type, out writeFn)) return writeFn;
 
@@ -61,62 +61,62 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Jsv
                     Interlocked.CompareExchange(ref WriteFnCache, newCache, snapshot), snapshot));
 
                 return writeFn;
-			}
-			catch (Exception ex)
-			{
-				Tracer.Instance.WriteError(ex);
-				throw;
-			}
-		}
+            }
+            catch (Exception ex)
+            {
+                Tracer.Instance.WriteError(ex);
+                throw;
+            }
+        }
 
-		public static void WriteLateBoundObject(TextWriter writer, object value)
-		{
-			if (value == null) return;
-			var type = value.GetType();
-			var writeFn = type == typeof(object)
+        public static void WriteLateBoundObject(TextWriter writer, object value)
+        {
+            if (value == null) return;
+            var type = value.GetType();
+            var writeFn = type == typeof(object)
                 ? WriteType<object, JsvTypeSerializer>.WriteObjectType
-				: GetWriteFn(type);
+                : GetWriteFn(type);
 
-			var prevState = JsState.IsWritingDynamic;
-			JsState.IsWritingDynamic = true;
-			writeFn(writer, value);
-			JsState.IsWritingDynamic = prevState;
-		}
+            var prevState = JsState.IsWritingDynamic;
+            JsState.IsWritingDynamic = true;
+            writeFn(writer, value);
+            JsState.IsWritingDynamic = prevState;
+        }
 
-		public static WriteObjectDelegate GetValueTypeToStringMethod(Type type)
-		{
-			return Instance.GetValueTypeToStringMethod(type);
-		}
-	}
+        public static WriteObjectDelegate GetValueTypeToStringMethod(Type type)
+        {
+            return Instance.GetValueTypeToStringMethod(type);
+        }
+    }
 
-	/// <summary>
-	/// Implement the serializer using a more static approach
-	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	internal static class JsvWriter<T>
-	{
-		private static WriteObjectDelegate CacheFn;
-        
+    /// <summary>
+    /// Implement the serializer using a more static approach
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    internal static class JsvWriter<T>
+    {
+        private static WriteObjectDelegate CacheFn;
+
         public static void Reset()
         {
             JsvWriter.RemoveCacheFn(typeof(T));
-            
-            CacheFn = typeof(T) == typeof(object) 
-                ? JsvWriter.WriteLateBoundObject 
+
+            CacheFn = typeof(T) == typeof(object)
+                ? JsvWriter.WriteLateBoundObject
                 : JsvWriter.Instance.GetWriteFn<T>();
         }
 
-		public static WriteObjectDelegate WriteFn()
-		{
-			return CacheFn ?? WriteObject;
-		}
+        public static WriteObjectDelegate WriteFn()
+        {
+            return CacheFn ?? WriteObject;
+        }
 
-		static JsvWriter()
-		{
-		    CacheFn = typeof(T) == typeof(object) 
-                ? JsvWriter.WriteLateBoundObject 
+        static JsvWriter()
+        {
+            CacheFn = typeof(T) == typeof(object)
+                ? JsvWriter.WriteLateBoundObject
                 : JsvWriter.Instance.GetWriteFn<T>();
-		}
+        }
 
         public static void WriteObject(TextWriter writer, object value)
         {
@@ -130,7 +130,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Jsv
 
                 CacheFn(writer, value);
             }
-            finally 
+            finally
             {
                 JsState.Depth--;
             }

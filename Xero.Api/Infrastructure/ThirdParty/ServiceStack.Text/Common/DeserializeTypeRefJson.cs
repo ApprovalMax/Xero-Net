@@ -36,7 +36,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
         private static string TransformFromLowercaseUnderscore(string propertyName)
         {
             // "lowercase-hyphen" -> "lowercase_underscore" -> LowercaseUnderscore
-            return propertyName.Replace("-","_").ToTitleCase();
+            return propertyName.Replace("-", "_").ToTitleCase();
         }
 
     }

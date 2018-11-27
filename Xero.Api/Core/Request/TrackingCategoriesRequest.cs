@@ -11,5 +11,5 @@ namespace Xero.Api.Core.Request
     [CollectionDataContract(Namespace = "", Name = "TrackingCategories")]
     public class TrackingCategoriesRequest : XeroRequest<TrackingCategory>
     {
-    }   
+    }
 }

@@ -200,7 +200,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             }
             return false;
         }
-        
+
         public static bool IsIntegerType(this Type type)
         {
             if (type == null) return false;
@@ -252,7 +252,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         {
             foreach (var t in type.GetTypeInterfaces())
             {
-                if (t.IsGeneric() && t.GetGenericTypeDefinition() == genericInterfaceType) 
+                if (t.IsGeneric() && t.GetGenericTypeDefinition() == genericInterfaceType)
                     return t;
             }
 
@@ -527,9 +527,9 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             if (type.IsDto())
             {
                 return !Env.IsMono
-                    ? publicReadableProperties.Where(attr => 
+                    ? publicReadableProperties.Where(attr =>
                         attr.IsDefined(typeof(DataMemberAttribute), false)).ToArray()
-                    : publicReadableProperties.Where(attr => 
+                    : publicReadableProperties.Where(attr =>
                         attr.CustomAttributes(false).Any(x => x.GetType().Name == DataMember)).ToArray();
             }
 
@@ -539,10 +539,11 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
 
         public static FieldInfo[] GetSerializableFields(this Type type)
         {
-            if (type.IsDto()) {
+            if (type.IsDto())
+            {
                 return new FieldInfo[0];
             }
-            
+
             var publicFields = type.GetPublicFields();
 
             // else return those properties that are not decorated with IgnoreDataMember
@@ -555,7 +556,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         }
 
 #if !SILVERLIGHT && !MONOTOUCH 
-        static readonly Dictionary<Type, TypeAccessor> typeAccessorMap 
+        static readonly Dictionary<Type, TypeAccessor> typeAccessorMap
             = new Dictionary<Type, TypeAccessor>();
 #endif
 
@@ -609,7 +610,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
                         typeAccessorMap[attrType] = accessor = TypeAccessor.Create(attr.GetType());
                 }
 
-                return new DataContractAttribute {
+                return new DataContractAttribute
+                {
                     Name = (string)accessor[attr, "Name"],
                     Namespace = (string)accessor[attr, "Namespace"],
                 };
@@ -631,8 +633,9 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
                         typeAccessorMap[attrType] = accessor = TypeAccessor.Create(attr.GetType());
                 }
 
-                var newAttr = new DataMemberAttribute {
-                    Name = (string) accessor[attr, "Name"],
+                var newAttr = new DataMemberAttribute
+                {
+                    Name = (string)accessor[attr, "Name"],
                     EmitDefaultValue = (bool)accessor[attr, "EmitDefaultValue"],
                     IsRequired = (bool)accessor[attr, "IsRequired"],
                 };
@@ -961,7 +964,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
                    .FirstOrDefault() as TAttr;
 #endif
         }
-        
+
         public static TAttribute FirstAttribute<TAttribute>(this PropertyInfo propertyInfo)
             where TAttribute : Attribute
         {
@@ -1052,7 +1055,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
 #endif
         }
 
-        public static Delegate MakeDelegate(this MethodInfo mi, Type delegateType, bool throwOnBindFailure=true)
+        public static Delegate MakeDelegate(this MethodInfo mi, Type delegateType, bool throwOnBindFailure = true)
         {
 #if NETFX_CORE
             return mi.CreateDelegate(delegateType);
@@ -1087,7 +1090,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             return type.IsAssignableFrom(fromType);
 #endif
         }
-        
+
         public static bool IsStandardClass(this Type type)
         {
 #if NETFX_CORE
@@ -1160,7 +1163,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             return type.IsInstanceOfType(instance);
 #endif
         }
-        
+
         public static bool IsClass(this Type type)
         {
 #if NETFX_CORE
@@ -1226,8 +1229,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             return result;
         }
 #endif
- 
-    
+
+
     }
 
 }

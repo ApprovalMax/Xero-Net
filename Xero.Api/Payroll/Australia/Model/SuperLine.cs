@@ -29,6 +29,6 @@ namespace Xero.Api.Payroll.Australia.Model
         public decimal? Percentage { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public decimal? MinimumMonthlyEarnings { get; set; }        
+        public decimal? MinimumMonthlyEarnings { get; set; }
     }
 }

@@ -3,7 +3,7 @@
 namespace Xero.Api.Payroll.America.Model.Types
 {
     // I'm sure there are more but I found these in the documentation
-    [DataContract(Namespace = "", Name = "BenefitCategory")]    
+    [DataContract(Namespace = "", Name = "BenefitCategory")]
     public enum BenefitCategoryType
     {
         [EnumMember(Value = "SECTION125PLAN")]

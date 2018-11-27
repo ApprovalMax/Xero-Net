@@ -21,5 +21,5 @@ namespace Xero.Api.Payroll.Australia.Model
 
         [DataMember(EmitDefaultValue = false)]
         public decimal Percentage { get; set; }
-    }    
+    }
 }

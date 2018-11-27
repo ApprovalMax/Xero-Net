@@ -12,8 +12,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         public const string Xml = "application/xml";
         public const string FormUrlEncoded = "application/x-www-form-urlencoded";
         public const string MultiPartFormData = "multipart/form-data";
-        
-        public static string GetJsonFromUrl(this string url, 
+
+        public static string GetJsonFromUrl(this string url,
             Action<HttpWebRequest> requestFilter = null, Action<HttpWebResponse> responseFilter = null)
         {
             return url.GetStringFromUrl(Json, requestFilter, responseFilter);
@@ -205,7 +205,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         public static byte[] GetBytesFromUrl(this string url, string acceptContentType = "*/*",
             Action<HttpWebRequest> requestFilter = null, Action<HttpWebResponse> responseFilter = null)
         {
-            return url.SendBytesToUrl(acceptContentType:acceptContentType, requestFilter: requestFilter, responseFilter: responseFilter);
+            return url.SendBytesToUrl(acceptContentType: acceptContentType, requestFilter: requestFilter, responseFilter: responseFilter);
         }
 
         public static byte[] PostBytesToUrl(this string url, byte[] requestBody = null, string contentType = null, string acceptContentType = "*/*",
@@ -248,7 +248,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             {
                 using (var req = webReq.GetRequestStream())
                 {
-                    req.Write(requestBody, 0, requestBody.Length);                    
+                    req.Write(requestBody, 0, requestBody.Length);
                 }
             }
 

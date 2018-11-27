@@ -12,5 +12,5 @@ namespace Xero.Api.Core.Response
         {
             get { return Attachments; }
         }
-    }    
+    }
 }

@@ -39,7 +39,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             if (collection == null)
                 throw new ArgumentNullException("collection");
 
-            _dict =  new Dictionary<T, short>(collection.Count());
+            _dict = new Dictionary<T, short>(collection.Count());
             foreach (T item in collection)
                 Add(item);
         }

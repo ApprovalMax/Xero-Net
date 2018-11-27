@@ -23,7 +23,7 @@ namespace Xero.Api.Payroll.America.Request
         public List<ReimbursementType> ReimbursementTypes { get { return PayItems.ReimbursementTypes; } }
 
         private PayItems PayItems { get; set; }
-        
+
         public IList<PayItems> Items { get { return new[] { PayItems }; } }
 
         public void Add(PayItems value)

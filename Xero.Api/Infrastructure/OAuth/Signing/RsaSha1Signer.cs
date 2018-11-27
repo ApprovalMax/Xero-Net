@@ -41,7 +41,7 @@ namespace Xero.Api.Infrastructure.OAuth.Signing
 
             oAuthParameters.SetSignature(signature);
 
-            return new AuthorizationHeader(oAuthParameters, string.Empty, renewToken).Value;        
+            return new AuthorizationHeader(oAuthParameters, string.Empty, renewToken).Value;
         }
     }
 }

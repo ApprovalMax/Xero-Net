@@ -13,7 +13,7 @@ namespace Xero.Api.Payroll.America.Model
 
         [DataMember(Name = "PayScheduleName")]
         public string Name { get; set; }
-        
+
         [DataMember]
         public DateTime PaymentDate { get; set; }
 

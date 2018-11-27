@@ -4,7 +4,7 @@ namespace Xero.Api.Core.Model.Types
     {
         Header,
         Row,
-        Section,        
+        Section,
         Summary
     }
 }

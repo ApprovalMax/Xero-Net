@@ -30,7 +30,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         public static JsConfigScope With(
             bool? convertObjectTypesIntoStringDictionary = null,
             bool? tryToParsePrimitiveTypeValues = null,
-			bool? tryToParseNumericType = null,
+            bool? tryToParseNumericType = null,
             bool? includeNullValues = null,
             bool? excludeTypeInfo = null,
             bool? includeTypeInfo = null,
@@ -43,7 +43,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             string typeAttr = null,
             Func<Type, string> typeWriter = null,
             Func<string, Type> typeFinder = null,
-			bool? treatEnumAsInteger = null,
+            bool? treatEnumAsInteger = null,
             bool? alwaysUseUtc = null,
             bool? assumeUtc = null,
             bool? appendUtcOffset = null,
@@ -53,7 +53,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             EmptyCtorFactoryDelegate modelFactory = null,
             string[] excludePropertyReferences = null)
         {
-            return new JsConfigScope {
+            return new JsConfigScope
+            {
                 ConvertObjectTypesIntoStringDictionary = convertObjectTypesIntoStringDictionary ?? sConvertObjectTypesIntoStringDictionary,
                 TryToParsePrimitiveTypeValues = tryToParsePrimitiveTypeValues ?? sTryToParsePrimitiveTypeValues,
                 TryToParseNumericType = tryToParseNumericType ?? sTryToParseNumericType,
@@ -86,8 +87,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         {
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.ConvertObjectTypesIntoStringDictionary: null)
-                    ?? sConvertObjectTypesIntoStringDictionary 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.ConvertObjectTypesIntoStringDictionary : null)
+                    ?? sConvertObjectTypesIntoStringDictionary
                     ?? false;
             }
             set
@@ -101,8 +102,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         {
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.TryToParsePrimitiveTypeValues: null)
-                    ?? sTryToParsePrimitiveTypeValues 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.TryToParsePrimitiveTypeValues : null)
+                    ?? sTryToParsePrimitiveTypeValues
                     ?? false;
             }
             set
@@ -111,28 +112,28 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             }
         }
 
-		private static bool? sTryToParseNumericType;
-		public static bool TryToParseNumericType
-		{
-			get
-			{
-				return (JsConfigScope.Current != null ? JsConfigScope.Current.TryToParseNumericType : null)
-					?? sTryToParseNumericType
-					?? false;
-			}
-			set
-			{
-				if (!sTryToParseNumericType.HasValue) sTryToParseNumericType = value;
-			}
-		}
+        private static bool? sTryToParseNumericType;
+        public static bool TryToParseNumericType
+        {
+            get
+            {
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.TryToParseNumericType : null)
+                    ?? sTryToParseNumericType
+                    ?? false;
+            }
+            set
+            {
+                if (!sTryToParseNumericType.HasValue) sTryToParseNumericType = value;
+            }
+        }
 
         private static bool? sIncludeNullValues;
         public static bool IncludeNullValues
         {
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.IncludeNullValues: null)
-                    ?? sIncludeNullValues 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.IncludeNullValues : null)
+                    ?? sIncludeNullValues
                     ?? false;
             }
             set
@@ -146,8 +147,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         {
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.TreatEnumAsInteger: null)
-                    ?? sTreatEnumAsInteger 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.TreatEnumAsInteger : null)
+                    ?? sTreatEnumAsInteger
                     ?? false;
             }
             set
@@ -161,8 +162,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         {
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.ExcludeTypeInfo: null)
-                    ?? sExcludeTypeInfo 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.ExcludeTypeInfo : null)
+                    ?? sExcludeTypeInfo
                     ?? false;
             }
             set
@@ -176,8 +177,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         {
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.IncludeTypeInfo: null)
-                    ?? sIncludeTypeInfo 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.IncludeTypeInfo : null)
+                    ?? sIncludeTypeInfo
                     ?? false;
             }
             set
@@ -191,8 +192,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         {
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.TypeAttr: null)
-                    ?? sTypeAttr 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.TypeAttr : null)
+                    ?? sTypeAttr
                     ?? JsWriter.TypeAttr;
             }
             set
@@ -209,8 +210,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         {
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.JsonTypeAttrInObject: null)
-                    ?? sJsonTypeAttrInObject 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.JsonTypeAttrInObject : null)
+                    ?? sJsonTypeAttrInObject
                     ?? defaultJsonTypeAttrInObject;
             }
             set
@@ -225,8 +226,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         {
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.JsvTypeAttrInObject: null)
-                    ?? sJsvTypeAttrInObject 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.JsvTypeAttrInObject : null)
+                    ?? sJsvTypeAttrInObject
                     ?? defaultJsvTypeAttrInObject;
             }
             set
@@ -240,8 +241,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         {
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.TypeWriter: null)
-                    ?? sTypeWriter 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.TypeWriter : null)
+                    ?? sTypeWriter
                     ?? AssemblyUtils.WriteType;
             }
             set
@@ -255,8 +256,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         {
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.TypeFinder: null)
-                    ?? sTypeFinder 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.TypeFinder : null)
+                    ?? sTypeFinder
                     ?? AssemblyUtils.FindType;
             }
             set
@@ -270,8 +271,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         {
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.DateHandler: null)
-                    ?? sDateHandler 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.DateHandler : null)
+                    ?? sDateHandler
                     ?? JsonDateHandler.TimestampOffset;
             }
             set
@@ -311,8 +312,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             // obeying the use of ThreadStatic, but allowing for setting JsConfig once as is the normal case
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.EmitCamelCaseNames: null)
-                    ?? sEmitCamelCaseNames 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.EmitCamelCaseNames : null)
+                    ?? sEmitCamelCaseNames
                     ?? false;
             }
             set
@@ -331,8 +332,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             // obeying the use of ThreadStatic, but allowing for setting JsConfig once as is the normal case
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.EmitLowercaseUnderscoreNames: null)
-                    ?? sEmitLowercaseUnderscoreNames 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.EmitLowercaseUnderscoreNames : null)
+                    ?? sEmitLowercaseUnderscoreNames
                     ?? false;
             }
             set
@@ -375,8 +376,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             // obeying the use of ThreadStatic, but allowing for setting JsConfig once as is the normal case
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.ThrowOnDeserializationError: null)
-                    ?? sThrowOnDeserializationError 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.ThrowOnDeserializationError : null)
+                    ?? sThrowOnDeserializationError
                     ?? false;
             }
             set
@@ -394,8 +395,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             // obeying the use of ThreadStatic, but allowing for setting JsConfig once as is the normal case
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.AlwaysUseUtc: null)
-                    ?? sAlwaysUseUtc 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.AlwaysUseUtc : null)
+                    ?? sAlwaysUseUtc
                     ?? false;
             }
             set
@@ -474,8 +475,8 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         {
             get
             {
-                return (JsConfigScope.Current != null ? JsConfigScope.Current.PreferInterfaces: null)
-                    ?? sPreferInterfaces 
+                return (JsConfigScope.Current != null ? JsConfigScope.Current.PreferInterfaces : null)
+                    ?? sPreferInterfaces
                     ?? false;
             }
             set
@@ -547,17 +548,20 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         }
 
         private static string[] sExcludePropertyReferences;
-        public static string[] ExcludePropertyReferences {
-            get {
+        public static string[] ExcludePropertyReferences
+        {
+            get
+            {
                 return (JsConfigScope.Current != null ? JsConfigScope.Current.ExcludePropertyReferences : null)
                        ?? sExcludePropertyReferences;
             }
-            set {
+            set
+            {
                 if (sExcludePropertyReferences != null) sExcludePropertyReferences = value;
             }
         }
 
-	    public static void Reset()
+        public static void Reset()
         {
             foreach (var rawSerializeType in HasSerializeFn.ToArray())
             {
@@ -566,7 +570,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
 
             sModelFactory = ReflectionExtensions.GetConstructorMethodToCache;
             sTryToParsePrimitiveTypeValues = null;
-		    sTryToParseNumericType = null;
+            sTryToParseNumericType = null;
             sConvertObjectTypesIntoStringDictionary = null;
             sIncludeNullValues = null;
             sExcludeTypeInfo = null;
@@ -581,7 +585,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             sJsvTypeAttrInObject = null;
             sTypeWriter = null;
             sTypeFinder = null;
-			sTreatEnumAsInteger = null;
+            sTreatEnumAsInteger = null;
             sAlwaysUseUtc = null;
             sAssumeUtc = null;
             sAppendUtcOffset = null;
@@ -871,7 +875,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
                     JsConfig.HasSerializeFn.Add(typeof(T));
                 else
                     JsConfig.HasSerializeFn.Remove(typeof(T));
-                
+
                 ClearFnCaches();
             }
         }
@@ -964,7 +968,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             else if (SerializeFn != null)
             {
                 var serializer = JsWriter.GetTypeSerializer<TSerializer>();
-                serializer.WriteString(writer, SerializeFn((T) obj));
+                serializer.WriteString(writer, SerializeFn((T)obj));
             }
             else
             {
@@ -989,7 +993,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
                 return DeSerializeFn(serializer.UnescapeString(str));
             }
         }
-        
+
         internal static void ClearFnCaches()
         {
             typeof(JsonWriter<>).MakeGenericType(new[] { typeof(T) }).InvokeReset();
@@ -1000,7 +1004,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
         {
             RawSerializeFn = null;
             DeSerializeFn = null;
-        }    
+        }
     }
 
     public enum JsonPropertyConvention

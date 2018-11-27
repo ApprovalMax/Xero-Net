@@ -102,7 +102,7 @@ namespace Xero.Api.Infrastructure.Http
             }
 
             HandleErrors(response);
-            
+
             return null;
         }
 
@@ -123,7 +123,7 @@ namespace Xero.Api.Infrastructure.Http
 
                 if (inlineValidationErrors.Any())
                 {
-                    data.Elements = new List<DataContractBase> { new DataContractBase {ValidationErrors = inlineValidationErrors } };
+                    data.Elements = new List<DataContractBase> { new DataContractBase { ValidationErrors = inlineValidationErrors } };
                     throw new ValidationException(data);
                 }
 
@@ -168,7 +168,7 @@ namespace Xero.Api.Infrastructure.Http
                 return;
             }
 
-            
+
             throw new XeroApiException(response.StatusCode, response.Body);
         }
     }

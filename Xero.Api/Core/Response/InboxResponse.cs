@@ -28,6 +28,6 @@ namespace Xero.Api.Core.Response
             }
         }
 
-        
+
     }
 }

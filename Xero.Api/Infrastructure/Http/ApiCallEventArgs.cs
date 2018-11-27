@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using ApprovalMax.Logging;
+using Microsoft.Extensions.Logging;
 
-namespace Xero.Api.Infrastructure.Http {
-    public class ApiCallEventArgs : EventArgs {
-        static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ApiCallEventArgs));
+namespace Xero.Api.Infrastructure.Http
+{
+    public class ApiCallEventArgs : EventArgs
+    {
+        static ILogger Logger { get; } = LogManager.CreateLogger(nameof(ApiCallEventArgs));
 
         private const string PATTERN = @"\/api\.xro\/\d.\d\/(?<endpoint>\w+)\/?(?<id>([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12})?\/?(?<att>Attachments)?\/?(?<attachId>.+)?";
         private static readonly Regex ENDPOINT_PARSER = new Regex(PATTERN, RegexOptions.Compiled);
@@ -21,23 +22,29 @@ namespace Xero.Api.Infrastructure.Http {
         // /api.xro/2.0/PurchaseOrders/f665acaf-6bc5-4329-a19f-7a8b76b44caf/Attachments/0049213465_20161017.pdf
         #endregion
 
-        public ApiCallEventArgs(string _endpoint, string _method, long _durationMS, string _responseStatusCode, string _errorMessage) {
+        public ApiCallEventArgs(string _endpoint, string _method, long _durationMS, string _responseStatusCode, string _errorMessage)
+        {
             this.Endpoint = _endpoint;
-            try {
+            try
+            {
                 var endpointMatch = ENDPOINT_PARSER.Match(this.Endpoint);
-                if (endpointMatch.Success) {
+                if (endpointMatch.Success)
+                {
                     var sb = new StringBuilder(endpointMatch.Groups["endpoint"].Value);
-                    if (endpointMatch.Groups["att"].Success) {
+                    if (endpointMatch.Groups["att"].Success)
+                    {
                         sb.Append("/GUID/").Append(endpointMatch.Groups["att"].Value);
                     }
-                    if (endpointMatch.Groups["attachId"].Success) {
+                    if (endpointMatch.Groups["attachId"].Success)
+                    {
                         sb.Append("/GUID");
                     }
                     this.Endpoint = sb.ToString();
                 }
             }
-            catch (Exception ex) {
-                logger.Error($"Unexpected exception while parsing Xero endpoint: {_endpoint}", ex);
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, $"Unexpected exception while parsing Xero endpoint: {_endpoint}");
             }
             this.Method = _method;
             this.DurationMS = _durationMS;

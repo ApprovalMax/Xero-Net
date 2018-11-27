@@ -11,6 +11,6 @@ namespace Xero.Api.Core.Response
         public override IList<ExpenseClaim> Values
         {
             get { return ExpenseClaims; }
-        }        
+        }
     }
 }

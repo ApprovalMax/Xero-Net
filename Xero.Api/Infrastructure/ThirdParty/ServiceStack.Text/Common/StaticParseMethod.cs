@@ -23,7 +23,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
         {
             // Get the static Parse(string) method on the type supplied
             var parseMethodInfo = typeof(T).GetPublicStaticMethod(parseMethod, new[] { typeof(string) });
-            if (parseMethodInfo == null) 
+            if (parseMethodInfo == null)
                 return null;
 
             ParseDelegate parseDelegate = null;

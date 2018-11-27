@@ -83,6 +83,6 @@ namespace Xero.Api.Payroll.America.Model
         public PayTemplate PayTemplate { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public OpeningBalances OpeningBalances { get; set; }        
+        public OpeningBalances OpeningBalances { get; set; }
     }
 }

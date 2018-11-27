@@ -15,7 +15,7 @@ namespace Xero.Api.Core.Model
 
         [DataMember(EmitDefaultValue = false)]
         public string AddressLine2 { get; set; }
-        
+
         [DataMember(EmitDefaultValue = false)]
         public string AddressLine3 { get; set; }
 

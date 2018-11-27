@@ -14,6 +14,6 @@ namespace Xero.Api.Payroll.Australia.Model
         public string Name { get; set; }
 
         [DataMember]
-        public string AccountCode { get; set; }        
+        public string AccountCode { get; set; }
     }
 }

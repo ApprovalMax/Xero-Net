@@ -32,7 +32,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
         {
             //Note the generic typeof(T) is faster than using var type = typeof(T)
             if (typeof(T) == typeof(bool))
-                return value => value.Length == 1 ? value == "1" : bool.Parse(value); 
+                return value => value.Length == 1 ? value == "1" : bool.Parse(value);
             if (typeof(T) == typeof(byte))
                 return value => byte.Parse(value, CultureInfo.InvariantCulture);
             if (typeof(T) == typeof(sbyte))
@@ -81,7 +81,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
                 return value => ulong.Parse(value);
 
             if (typeof(T) == typeof(bool?))
-                return value => string.IsNullOrEmpty(value) ? (bool?)null : value.Length == 1 ? value == "1" : bool.Parse(value); 
+                return value => string.IsNullOrEmpty(value) ? (bool?)null : value.Length == 1 ? value == "1" : bool.Parse(value);
             if (typeof(T) == typeof(byte?))
                 return value => string.IsNullOrEmpty(value) ? (byte?)null : byte.Parse(value);
             if (typeof(T) == typeof(sbyte?))

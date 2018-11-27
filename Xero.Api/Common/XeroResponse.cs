@@ -9,7 +9,7 @@ namespace Xero.Api.Common
 {
     public abstract class XeroResponse<T> : XeroResponse, IXeroResponse<T>
     {
-        public abstract IList<T> Values { get; }        
+        public abstract IList<T> Values { get; }
     }
 
     [DataContract(Namespace = "")]
@@ -26,7 +26,7 @@ namespace Xero.Api.Common
 
         [DataMember(Name = "DateTimeUTC")]
         public DateTime DateTime { get; set; }
-       
+
 
     }
 }

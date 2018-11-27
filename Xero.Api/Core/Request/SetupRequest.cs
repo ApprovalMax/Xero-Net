@@ -6,11 +6,11 @@ using Xero.Api.Infrastructure.Interfaces;
 
 namespace Xero.Api.Core.Request
 {
-    [DataContract(Namespace = "", Name="Setup")]
+    [DataContract(Namespace = "", Name = "Setup")]
     public class SetupRequest : IXeroRequest<Setup>
     {
         public IList<Setup> Items { get; private set; }
-        
+
         public void Add(Setup value)
         {
             throw new NotImplementedException();

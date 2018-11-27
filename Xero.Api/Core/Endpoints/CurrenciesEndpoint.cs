@@ -8,7 +8,7 @@ namespace Xero.Api.Core.Endpoints
 {
     public interface ICurrenciesEndpoint : IXeroCreateEndpoint<CurrenciesEndpoint, Currency, CurrenciesRequest, CurrenciesResponse>
     {
-        
+
     }
 
     public class CurrenciesEndpoint : XeroCreateEndpoint<CurrenciesEndpoint, Currency, CurrenciesRequest, CurrenciesResponse>,

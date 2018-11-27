@@ -9,46 +9,52 @@ namespace Xero.Api.Infrastructure.ThirdParty.Dust.Core.SignatureBaseStringParts.
     internal class RequestParameters : IEnumerable<Parameter>
     {
         private readonly NameValueCollection _values;
-    	private readonly Parameters _parameters;
+        private readonly Parameters _parameters;
 
-    	public RequestParameters(Request request)
+        public RequestParameters(Request request)
         {
             _values = HttpUtility.HttpUtility.ParseQueryString(request.Url.Query);
 
-        	_parameters = new Parameters(MapAll());
+            _parameters = new Parameters(MapAll());
         }
 
-    	private Parameter[] MapAll() {
-    		return _values.AllKeys.SelectMany(Map).ToArray();
-    	}
-
-    	private IEnumerable<Parameter> Map(string key)
+        private Parameter[] MapAll()
         {
-    		return ValuesFor(key).Select(v => new Parameter(key, v));
+            return _values.AllKeys.SelectMany(Map).ToArray();
         }
 
-    	private string[] ValuesFor(string key) {
-    		return _values.GetValues(key);
-    	}
+        private IEnumerable<Parameter> Map(string key)
+        {
+            return ValuesFor(key).Select(v => new Parameter(key, v));
+        }
 
-    	#region Implementation of IEnumerable
+        private string[] ValuesFor(string key)
+        {
+            return _values.GetValues(key);
+        }
 
-    	IEnumerator IEnumerable.GetEnumerator() {
-    		return GetEnumerator();
-    	}
+        #region Implementation of IEnumerable
 
-    	public IEnumerator<Parameter> GetEnumerator() {
-    		return _parameters.GetEnumerator();
-    	}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
 
-    	#endregion
+        public IEnumerator<Parameter> GetEnumerator()
+        {
+            return _parameters.GetEnumerator();
+        }
 
-    	internal void Add(Parameters what) {
-    		_parameters.Add(what);
-    	}
+        #endregion
 
-		public override string ToString() {
-			return _parameters.ToString();
-		}
+        internal void Add(Parameters what)
+        {
+            _parameters.Add(what);
+        }
+
+        public override string ToString()
+        {
+            return _parameters.ToString();
+        }
     }
 }

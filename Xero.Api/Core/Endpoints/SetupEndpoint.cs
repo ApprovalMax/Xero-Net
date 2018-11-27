@@ -45,7 +45,7 @@ namespace Xero.Api.Core.Endpoints
         {
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                return _client.JsonMapper.From<SetupResponse>(response.Body).ImportSummary;                
+                return _client.JsonMapper.From<SetupResponse>(response.Body).ImportSummary;
             }
 
             _client.HandleErrors(response);

@@ -22,6 +22,6 @@ namespace Xero.Api.Core.Model.Types
         [EnumMember(Value = "QUARTERLY3")]
         QuarterlyThree,
         [EnumMember(Value = "ANNUALLY")]
-        Annually        
+        Annually
     }
 }

@@ -32,7 +32,7 @@ namespace Xero.Api.Core.Endpoints
 
         public HistoryRecord CreateNote(HistoryAndNotesEndpointCreateType type, Guid parent, HistoryRecord note)
         {
-            var request = new HistoryRecordsRequest {note};
+            var request = new HistoryRecordsRequest { note };
 
             return Client.Put<HistoryRecord, HistoryRecordsResponse>(string.Format("api.xro/2.0/{0}/{1:D}/history", type, parent), request).FirstOrDefault();
         }

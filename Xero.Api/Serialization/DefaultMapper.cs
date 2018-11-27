@@ -189,14 +189,14 @@ namespace Xero.Api.Serialization
             {
                 case "ACCURAL":
                 case "ACCURALS":
-                {
-                    return SalesTaxBasisType.Accural;
-                }
+                    {
+                        return SalesTaxBasisType.Accural;
+                    }
 
                 default:
-                {
-                    return EnumDeserializer<SalesTaxBasisType>(s);
-                }
+                    {
+                        return EnumDeserializer<SalesTaxBasisType>(s);
+                    }
             }
         }
 
@@ -207,34 +207,34 @@ namespace Xero.Api.Serialization
                 case "MONTHLY":
                 case "ONEMONTHS":
                 case "1MONTHLY":
-                {
-                    return SalesTaxPeriodType.Monthly;
-                }
+                    {
+                        return SalesTaxPeriodType.Monthly;
+                    }
                 case "TWOMONTHS":
                 case "2MONTHLY":
-                {
-                    return SalesTaxPeriodType.TwoMonths;
-                }
+                    {
+                        return SalesTaxPeriodType.TwoMonths;
+                    }
                 case "3MONTHLY":
                 case "QUARTERLY":
-                {
-                    return SalesTaxPeriodType.Quarterly;
-                }
+                    {
+                        return SalesTaxPeriodType.Quarterly;
+                    }
                 case "SIXMONTHS":
                 case "6MONTHLY":
-                {
-                    return SalesTaxPeriodType.SixMonths;
-                }
+                    {
+                        return SalesTaxPeriodType.SixMonths;
+                    }
                 case "ANNUALLY":
                 case "YEARLY":
-                {
-                    return SalesTaxPeriodType.Annually;
-                }
-                
+                    {
+                        return SalesTaxPeriodType.Annually;
+                    }
+
                 default:
-                {
-                    return EnumDeserializer<SalesTaxPeriodType>(s);
-                }                    
+                    {
+                        return EnumDeserializer<SalesTaxPeriodType>(s);
+                    }
             }
         }
     }

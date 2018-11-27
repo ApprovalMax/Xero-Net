@@ -18,6 +18,6 @@ namespace Xero.Api.Core.Model
         public string Status { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public List<Contact> Contacts { get; set; }        
+        public List<Contact> Contacts { get; set; }
     }
 }

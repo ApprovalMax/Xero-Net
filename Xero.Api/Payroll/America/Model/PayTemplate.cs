@@ -16,6 +16,6 @@ namespace Xero.Api.Payroll.America.Model
         public List<ReimbursementLine> ReimbursementLines { get; set; }
 
         [DataMember]
-        public List<BenefitLine>  BenefitLines { get; set; }
+        public List<BenefitLine> BenefitLines { get; set; }
     }
 }

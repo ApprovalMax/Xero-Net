@@ -68,7 +68,7 @@ namespace Xero.Api.Core.Endpoints
             List<TrackingCategory> trackingCats = HandleResponse(Client.Client.Get(endpoint, QueryString)).TrackingCategories.ToList();
 
             return trackingCats;
-        } 
+        }
 
         public TrackingCategory Add(TrackingCategory trackingCategory)
         {
@@ -170,7 +170,7 @@ namespace Xero.Api.Core.Endpoints
         public List<Option> Add(Option option)
         {
             List<Option> options = new List<Option>();
- 
+
             options.Add(option);
 
             return AssignOptions(_trackingCat, options); ;
@@ -212,7 +212,7 @@ namespace Xero.Api.Core.Endpoints
 
             List<Option> Options = new List<Option>();
             Options.Add(option);
-            
+
             var result = HandleResponse(_client
                  .Client
                  .Post(endpoint, _client.XmlMapper.To(Options))).Options.FirstOrDefault();

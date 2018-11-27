@@ -16,6 +16,6 @@ namespace Xero.Api.Core.Model.Status
         [EnumMember(Value = "PAID")]
         Paid,
         [EnumMember(Value = "VOIDED")]
-        Voided        
+        Voided
     }
 }

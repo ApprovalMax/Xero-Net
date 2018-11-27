@@ -10,12 +10,12 @@ namespace Xero.Api.Common
         public string Where { get; private set; }
         public string Order { get; private set; }
         public NameValueCollection Parameters { get; private set; }
-        
+
         public QueryGenerator(string where, string order, NameValueCollection parameters)
         {
             Where = where;
             Order = order;
-            Parameters = parameters;            
+            Parameters = parameters;
         }
 
         public string QueryString
@@ -48,7 +48,7 @@ namespace Xero.Api.Common
             if (!string.IsNullOrWhiteSpace(Order))
             {
                 collection.Add("order", Order);
-            }            
+            }
 
             if (Parameters != null)
             {

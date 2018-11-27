@@ -13,5 +13,5 @@ namespace Xero.Api.Infrastructure.Exceptions
             : base(HttpStatusCode.NotFound, body)
         {
         }
-    }    
+    }
 }

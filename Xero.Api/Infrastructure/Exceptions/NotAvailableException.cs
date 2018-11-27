@@ -11,7 +11,7 @@ namespace Xero.Api.Infrastructure.Exceptions
 
         public NotAvailableException(string body)
             : base(HttpStatusCode.ServiceUnavailable, body)
-        {            
+        {
         }
     }
 }

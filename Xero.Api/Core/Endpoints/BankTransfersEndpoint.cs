@@ -9,9 +9,9 @@ namespace Xero.Api.Core.Endpoints
     public interface IBankTransfersEndpoint :
         IXeroCreateEndpoint<BankTransfersEndpoint, BankTransfer, BankTransfersRequest, BankTransfersResponse>
     {
-        
+
     }
-    public class BankTransfersEndpoint : XeroCreateEndpoint<BankTransfersEndpoint, BankTransfer, BankTransfersRequest, BankTransfersResponse>, 
+    public class BankTransfersEndpoint : XeroCreateEndpoint<BankTransfersEndpoint, BankTransfer, BankTransfersRequest, BankTransfersResponse>,
         IBankTransfersEndpoint
     {
         public BankTransfersEndpoint(XeroHttpClient client)

@@ -46,7 +46,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
         /// </summary>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        private static DateTime Prepare(this DateTime dateTime, bool parsedAsUtc=false)
+        private static DateTime Prepare(this DateTime dateTime, bool parsedAsUtc = false)
         {
             if (JsConfig.AlwaysUseUtc)
             {
@@ -80,7 +80,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
             dateTimeStr = RepairXsdTimeSeparator(dateTimeStr);
 
             if (dateTimeStr.Length == XsdDateTimeFormatSeconds.Length)
-                return DateTime.ParseExact(dateTimeStr, XsdDateTimeFormatSeconds, null, DateTimeStyles.AdjustToUniversal).Prepare(parsedAsUtc:true); 
+                return DateTime.ParseExact(dateTimeStr, XsdDateTimeFormatSeconds, null, DateTimeStyles.AdjustToUniversal).Prepare(parsedAsUtc: true);
 
             if (dateTimeStr.Length >= XsdDateTimeFormat3F.Length
                 && dateTimeStr.Length <= XsdDateTimeFormat.Length
@@ -97,7 +97,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
                 if (dateTime != null)
                     return dateTime.Value;
 
-                return XmlConvert.ToDateTime(dateTimeStr, XmlDateTimeSerializationMode.Utc).Prepare(parsedAsUtc:true);
+                return XmlConvert.ToDateTime(dateTimeStr, XmlDateTimeSerializationMode.Utc).Prepare(parsedAsUtc: true);
 #endif
             }
 
@@ -123,7 +123,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
         /// <returns>The repaired string. If no repairs were made, the original string is returned.</returns>
         private static string RepairXsdTimeSeparator(string dateTimeStr)
         {
-            if( (dateTimeStr.Length > XsdTimeSeparatorIndex) && (dateTimeStr[XsdTimeSeparatorIndex] == ' ') && dateTimeStr.EndsWith(XsdUtcSuffix) )
+            if ((dateTimeStr.Length > XsdTimeSeparatorIndex) && (dateTimeStr[XsdTimeSeparatorIndex] == ' ') && dateTimeStr.EndsWith(XsdUtcSuffix))
             {
                 dateTimeStr = dateTimeStr.Substring(0, XsdTimeSeparatorIndex) + XsdTimeSeparator +
                               dateTimeStr.Substring(XsdTimeSeparatorIndex + 1);
@@ -256,7 +256,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common
 
             return DateTimeOffset.Parse(dateTimeOffsetStr, CultureInfo.InvariantCulture);
         }
-		
+
         public static DateTimeOffset? ParseDateTimeOffsetNullable(string dateTimeOffsetStr)
         {
             if (string.IsNullOrEmpty(dateTimeOffsetStr)) return null;

@@ -12,7 +12,7 @@ namespace Xero.Api.Core.Response
 
         public override IList<CreditNote> Values
         {
-            get{ return CreditNotes;}
+            get { return CreditNotes; }
         }
     }
 }

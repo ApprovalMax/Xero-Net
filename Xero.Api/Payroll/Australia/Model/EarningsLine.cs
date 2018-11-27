@@ -30,5 +30,5 @@ namespace Xero.Api.Payroll.Australia.Model
 
         [DataMember(EmitDefaultValue = false)]
         public EarningsRateCalculationType? CalculationType { get; set; }
-    } 
+    }
 }

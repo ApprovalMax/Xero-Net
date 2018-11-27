@@ -22,17 +22,17 @@ using Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Jsv;
 
 namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
 {
-	public static class QueryStringSerializer
-	{
-		internal static readonly JsWriter<JsvTypeSerializer> Instance = new JsWriter<JsvTypeSerializer>();
+    public static class QueryStringSerializer
+    {
+        internal static readonly JsWriter<JsvTypeSerializer> Instance = new JsWriter<JsvTypeSerializer>();
 
-		private static Dictionary<Type, WriteObjectDelegate> WriteFnCache = new Dictionary<Type, WriteObjectDelegate>();
+        private static Dictionary<Type, WriteObjectDelegate> WriteFnCache = new Dictionary<Type, WriteObjectDelegate>();
 
-		internal static WriteObjectDelegate GetWriteFn(Type type)
-		{
-			try
-			{
-				WriteObjectDelegate writeFn;
+        internal static WriteObjectDelegate GetWriteFn(Type type)
+        {
+            try
+            {
+                WriteObjectDelegate writeFn;
                 if (WriteFnCache.TryGetValue(type, out writeFn)) return writeFn;
 
                 var genericType = typeof(QueryStringWriter<>).MakeGenericType(type);
@@ -51,90 +51,90 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
 
                 } while (!ReferenceEquals(
                     Interlocked.CompareExchange(ref WriteFnCache, newCache, snapshot), snapshot));
-                
+
                 return writeFn;
-			}
-			catch (Exception ex)
-			{
-				Tracer.Instance.WriteError(ex);
-				throw;
-			}
-		}
+            }
+            catch (Exception ex)
+            {
+                Tracer.Instance.WriteError(ex);
+                throw;
+            }
+        }
 
-		public static void WriteLateBoundObject(TextWriter writer, object value)
-		{
-			if (value == null) return;
-			var writeFn = GetWriteFn(value.GetType());
-			writeFn(writer, value);
-		}
+        public static void WriteLateBoundObject(TextWriter writer, object value)
+        {
+            if (value == null) return;
+            var writeFn = GetWriteFn(value.GetType());
+            writeFn(writer, value);
+        }
 
-		internal static WriteObjectDelegate GetValueTypeToStringMethod(Type type)
-		{
-			return Instance.GetValueTypeToStringMethod(type);
-		}
+        internal static WriteObjectDelegate GetValueTypeToStringMethod(Type type)
+        {
+            return Instance.GetValueTypeToStringMethod(type);
+        }
 
-		public static string SerializeToString<T>(T value)
-		{
-			var sb = new StringBuilder();
-			using (var writer = new StringWriter(sb, CultureInfo.InvariantCulture))
-			{
-				GetWriteFn(value.GetType())(writer, value);
-			}
-			return sb.ToString();
-		}
-	}
+        public static string SerializeToString<T>(T value)
+        {
+            var sb = new StringBuilder();
+            using (var writer = new StringWriter(sb, CultureInfo.InvariantCulture))
+            {
+                GetWriteFn(value.GetType())(writer, value);
+            }
+            return sb.ToString();
+        }
+    }
 
-	/// <summary>
-	/// Implement the serializer using a more static approach
-	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	public static class QueryStringWriter<T>
-	{
-		private static readonly WriteObjectDelegate CacheFn;
+    /// <summary>
+    /// Implement the serializer using a more static approach
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public static class QueryStringWriter<T>
+    {
+        private static readonly WriteObjectDelegate CacheFn;
 
-	    public static WriteObjectDelegate WriteFn()
-		{
-			return CacheFn;
-		}
+        public static WriteObjectDelegate WriteFn()
+        {
+            return CacheFn;
+        }
 
-		static QueryStringWriter()
-		{
-			if (typeof(T) == typeof(object))
-			{
-				CacheFn = QueryStringSerializer.WriteLateBoundObject;
-			}
-            else if (typeof (T).AssignableFrom(typeof (IDictionary))
-                || typeof (T).HasInterface(typeof (IDictionary)))
+        static QueryStringWriter()
+        {
+            if (typeof(T) == typeof(object))
+            {
+                CacheFn = QueryStringSerializer.WriteLateBoundObject;
+            }
+            else if (typeof(T).AssignableFrom(typeof(IDictionary))
+                || typeof(T).HasInterface(typeof(IDictionary)))
             {
                 CacheFn = WriteIDictionary;
             }
-			else
-			{
+            else
+            {
                 var isEnumerable = typeof(T).AssignableFrom(typeof(IEnumerable))
                     || typeof(T).HasInterface(typeof(IEnumerable));
 
-                if ((typeof(T).IsClass() || typeof(T).IsInterface()) 
+                if ((typeof(T).IsClass() || typeof(T).IsInterface())
                     && !isEnumerable)
                 {
-					var canWriteType = WriteType<T, JsvTypeSerializer>.Write;
-					if (canWriteType != null)
-					{
-						CacheFn = WriteType<T, JsvTypeSerializer>.WriteQueryString;
-						return;
-					}
-				}
+                    var canWriteType = WriteType<T, JsvTypeSerializer>.Write;
+                    if (canWriteType != null)
+                    {
+                        CacheFn = WriteType<T, JsvTypeSerializer>.WriteQueryString;
+                        return;
+                    }
+                }
 
-				CacheFn = QueryStringSerializer.Instance.GetWriteFn<T>();
-			}
-		}
+                CacheFn = QueryStringSerializer.Instance.GetWriteFn<T>();
+            }
+        }
 
-		public static void WriteObject(TextWriter writer, object value)
-		{
-			if (writer == null) return;
-			CacheFn(writer, value);
-		}
+        public static void WriteObject(TextWriter writer, object value)
+        {
+            if (writer == null) return;
+            CacheFn(writer, value);
+        }
 
-        private static readonly ITypeSerializer Serializer = JsvTypeSerializer.Instance;        
+        private static readonly ITypeSerializer Serializer = JsvTypeSerializer.Instance;
         public static void WriteIDictionary(TextWriter writer, object oMap)
         {
             WriteObjectDelegate writeKeyFn = null;
@@ -179,11 +179,11 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
                     JsState.IsWritingValue = false;
                 }
             }
-            finally 
+            finally
             {
                 JsState.QueryStringMode = false;
             }
         }
     }
-	
+
 }

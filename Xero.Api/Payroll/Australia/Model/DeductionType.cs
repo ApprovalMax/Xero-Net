@@ -20,6 +20,6 @@ namespace Xero.Api.Payroll.Australia.Model
         public bool ReducesTax { get; set; }
 
         [DataMember]
-        public bool ReducesSuper { get; set; }        
+        public bool ReducesSuper { get; set; }
     }
 }

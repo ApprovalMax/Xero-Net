@@ -11,6 +11,6 @@ namespace Xero.Api.Core.Response
         public override IList<Receipt> Values
         {
             get { return Receipts; }
-        }        
+        }
     }
 }

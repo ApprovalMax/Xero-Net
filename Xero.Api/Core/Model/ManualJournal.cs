@@ -34,7 +34,7 @@ namespace Xero.Api.Core.Model
         [DataMember(EmitDefaultValue = false)]
         public bool? HasAttachments { get; set; }
 
-        [DataMember(Name="JournalLines")]
+        [DataMember(Name = "JournalLines")]
         public List<Line> Lines { get; set; }
     }
 }

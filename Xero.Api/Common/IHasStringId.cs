@@ -1,5 +1,7 @@
-﻿namespace Xero.Api.Common {
-    public interface IHasStringId {
+﻿namespace Xero.Api.Common
+{
+    public interface IHasStringId
+    {
         string StringId { get; }
     }
 }

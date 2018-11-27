@@ -23,7 +23,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
 #endif
 );
 
-        public XmlSerializer(XmlDictionaryReaderQuotas quotas=null, bool omitXmlDeclaration = false)
+        public XmlSerializer(XmlDictionaryReaderQuotas quotas = null, bool omitXmlDeclaration = false)
         {
             this.quotas = quotas;
             XSettings.Encoding = new UTF8Encoding(false);
@@ -113,7 +113,7 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text
             try
             {
 #if !SILVERLIGHT
-				using (var xw = new XmlTextWriter(writer))
+                using (var xw = new XmlTextWriter(writer))
 #else
                 using (var xw = XmlWriter.Create(writer))
 #endif

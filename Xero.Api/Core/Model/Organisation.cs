@@ -7,7 +7,7 @@ using Xero.Api.Core.Model.Types;
 namespace Xero.Api.Core.Model
 {
     [DataContract(Namespace = "")]
-    public class Organisation: Common.IHasStringId
+    public class Organisation : Common.IHasStringId
     {
         [DataMember(Name = "OrganisationID")]
         public Guid Id { get; set; }
@@ -56,7 +56,7 @@ namespace Xero.Api.Core.Model
 
         [DataMember(EmitDefaultValue = false)]
         public DateTime? PeriodLockDate { get; set; }
-        
+
         [DataMember(EmitDefaultValue = false)]
         public DateTime? EndOfYearLockDate { get; set; }
 

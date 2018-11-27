@@ -17,15 +17,15 @@ using Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Common;
 
 namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Json
 {
-	internal static class JsonReader
-	{
-		public static readonly JsReader<JsonTypeSerializer> Instance = new JsReader<JsonTypeSerializer>();
+    internal static class JsonReader
+    {
+        public static readonly JsReader<JsonTypeSerializer> Instance = new JsReader<JsonTypeSerializer>();
 
-		private static Dictionary<Type, ParseFactoryDelegate> ParseFnCache = new Dictionary<Type, ParseFactoryDelegate>();
-        
-		public static ParseStringDelegate GetParseFn(Type type)
-		{
-			ParseFactoryDelegate parseFactoryFn;
+        private static Dictionary<Type, ParseFactoryDelegate> ParseFnCache = new Dictionary<Type, ParseFactoryDelegate>();
+
+        public static ParseStringDelegate GetParseFn(Type type)
+        {
+            ParseFactoryDelegate parseFactoryFn;
             ParseFnCache.TryGetValue(type, out parseFactoryFn);
 
             if (parseFactoryFn != null) return parseFactoryFn();
@@ -43,44 +43,44 @@ namespace Xero.Api.Infrastructure.ThirdParty.ServiceStack.Text.Json
 
             } while (!ReferenceEquals(
                 Interlocked.CompareExchange(ref ParseFnCache, newCache, snapshot), snapshot));
-            
+
             return parseFactoryFn();
-		}
-	}
+        }
+    }
 
-	public static class JsonReader<T>
-	{
-		private static readonly ParseStringDelegate ReadFn;
+    public static class JsonReader<T>
+    {
+        private static readonly ParseStringDelegate ReadFn;
 
-		static JsonReader()
-		{
-			ReadFn = JsonReader.Instance.GetParseFn<T>();
-		}
-		
-		public static ParseStringDelegate GetParseFn()
-		{
-			return ReadFn ?? Parse;
-		}
+        static JsonReader()
+        {
+            ReadFn = JsonReader.Instance.GetParseFn<T>();
+        }
 
-		public static object Parse(string value)
-		{
-			if (ReadFn == null)
-			{
+        public static ParseStringDelegate GetParseFn()
+        {
+            return ReadFn ?? Parse;
+        }
+
+        public static object Parse(string value)
+        {
+            if (ReadFn == null)
+            {
                 if (typeof(T).IsAbstract() || typeof(T).IsInterface())
                 {
-					if (string.IsNullOrEmpty(value)) return null;
-					var concreteType = DeserializeType<JsonTypeSerializer>.ExtractType(value);
-					if (concreteType != null)
-					{
-						return JsonReader.GetParseFn(concreteType)(value);
-					}
-					throw new NotSupportedException("Can not deserialize interface type: "
-						+ typeof(T).Name);
-				}
-			}
-			return value == null 
-			       	? null 
-			       	: ReadFn(value);
-		}
-	}
+                    if (string.IsNullOrEmpty(value)) return null;
+                    var concreteType = DeserializeType<JsonTypeSerializer>.ExtractType(value);
+                    if (concreteType != null)
+                    {
+                        return JsonReader.GetParseFn(concreteType)(value);
+                    }
+                    throw new NotSupportedException("Can not deserialize interface type: "
+                        + typeof(T).Name);
+                }
+            }
+            return value == null
+                       ? null
+                       : ReadFn(value);
+        }
+    }
 }

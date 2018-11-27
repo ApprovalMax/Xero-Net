@@ -16,6 +16,6 @@ namespace Xero.Api.Infrastructure.OAuth
         }
 
         public string ConsumerKey { get; internal set; }
-        public string ConsumerSecret { get; internal set; }        
+        public string ConsumerSecret { get; internal set; }
     }
 }
