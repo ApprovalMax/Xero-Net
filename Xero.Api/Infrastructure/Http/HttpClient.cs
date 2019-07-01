@@ -137,6 +137,9 @@ namespace Xero.Api.Infrastructure.Http
             }
 
             var request = (HttpWebRequest)WebRequest.Create(uri.Uri);
+            // TODO: params to control connections
+            // request.ServicePoint.MaxIdleTime = 30000;
+            // request.KeepAlive = false;
 
             request.Timeout = defaultTimeout;
 
@@ -161,8 +164,7 @@ namespace Xero.Api.Infrastructure.Http
 
             request.UserAgent = !string.IsNullOrWhiteSpace(UserAgent) ? UserAgent : "Xero Api wrapper - " + Consumer.ConsumerKey;
 
-            if (_rateLimiter != null)
-                _rateLimiter.WaitUntilLimit();
+            _rateLimiter?.WaitUntilLimit();
 
             return request;
         }
@@ -232,30 +234,31 @@ namespace Xero.Api.Infrastructure.Http
             });
         }
 
-        private Response MakeCall(string _endpoint, Func<HttpWebRequest> _getHttpWebRequest)
+        private Response MakeCall(string endpoint, Func<HttpWebRequest> createHttpWebRequest)
         {
             var method = "Unknown";
-            var responseCode = "N/A";
-            var errorMessage = default(string);
+            string responseCode;
             var stopwatch = Stopwatch.StartNew();
             try
             {
-                var request = _getHttpWebRequest();
+                var request = createHttpWebRequest();
                 method = request.Method;
-                try { Logger.LogInformation($"Sending data to Xero:\nMethod: {method},\nUri: {request.RequestUri}"); }
-                catch { }
+                Logger.LogDebug("Sending data to Xero. {method}, {requestUri}", method, request.RequestUri);
 
-                var webResponse = (HttpWebResponse)request.GetResponse();
-                responseCode = webResponse.StatusCode.ToString();
-                stopwatch.Stop();
-                ApiCalled?.Invoke(this, new ApiCallEventArgs(_endpoint, method, stopwatch.ElapsedMilliseconds, responseCode, errorMessage));
-                var response = new Response(webResponse);
-                webResponse.Close();
+                Response response;
+                using (var webResponse = (HttpWebResponse)request.GetResponse())
+                {
+                    responseCode = webResponse.StatusCode.ToString();
+                    stopwatch.Stop();
+                    ApiCalled?.Invoke(this, new ApiCallEventArgs(endpoint, method, stopwatch.ElapsedMilliseconds, responseCode, null));
+                    response = new Response(webResponse);
+                }
+
                 return response;
             }
             catch (WebException we)
             {
-                Logger.LogWarning("WebException occured during calling Xero API", we);
+                Logger.LogWarning(we, "WebException occured during calling Xero API.");
                 if (we.Response != null)
                 {
                     var response = new Response((HttpWebResponse)we.Response);
@@ -268,9 +271,9 @@ namespace Xero.Api.Infrastructure.Http
                     {
                         responseCode = response.StatusCode.ToString();
                     }
-                    errorMessage = response.Body;
+
                     stopwatch.Stop();
-                    ApiCalled?.Invoke(this, new ApiCallEventArgs(_endpoint, method, stopwatch.ElapsedMilliseconds, responseCode, errorMessage));
+                    ApiCalled?.Invoke(this, new ApiCallEventArgs(endpoint, method, stopwatch.ElapsedMilliseconds, responseCode, response.Body));
                     return response;
                 }
 
